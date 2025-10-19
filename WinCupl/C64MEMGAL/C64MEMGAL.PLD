@@ -1,0 +1,38 @@
+Name     C64MemGAL;
+PartNo   00;
+Date     2/5/2025;
+Revision 01;
+Designer Stefan Warnke;
+Company  private;
+Assembly None;
+Location None;
+Device   g16v8;
+
+
+/* *************** INPUT PINS *********************/
+Pin [1..3] = [P0..2]; 
+Pin [4..9] = [A15..10];   
+Pin 11 = !RAM_ONLY;
+
+/* *************** OUTPUT PINS *********************/
+PIN 19  = !CS_RAML;
+PIN 18  = !CS_RAMH;
+
+PIN 17  = !CS_ROM;
+PIN 16  = !CS_IO;   
+  
+PIN 15  = !CS_VIC;     
+PIN 14  = !CS_SID;     
+PIN 13  = !CS_CRAM;     
+PIN 12  = !CS_EXT;     
+
+
+CS_IO  = A15 & A14 & !A13 & A12 & P2 & !(!P1 & !P0);
+CS_ROM = ((A15 & !A14 & A13 & P1 & P0) # (A15 & A14 & !A13 & A12 & !P2 & !(!P1 & !P0)) # (A15 & A14 & A13 & P1)) & !RAM_ONLY;
+CS_RAML = !(CS_IO # CS_ROM) & !A15;
+CS_RAMH = !(CS_IO # CS_ROM) &  A15;
+
+CS_VIC  = CS_IO & !A11 & !A10;
+CS_SID  = CS_IO & !A11 & A10;
+CS_CRAM = CS_IO & A11 & !A10;
+CS_EXT  = CS_IO & A11 & A10;

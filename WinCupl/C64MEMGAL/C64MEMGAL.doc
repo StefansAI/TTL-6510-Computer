@@ -1,0 +1,217 @@
+
+*******************************************************************************
+                                   C64MemGAL
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          g16v8ma  Library DLIB-h-40-8
+Created         Tue Apr 22 19:45:32 2025
+Name            C64MemGAL
+Partno          00
+Revision        01
+Date            2/5/2025
+Designer        Stefan Warnke
+Company         private
+Assembly        None
+Location        None
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+CS_CRAM =>
+    !A10 & A11 & CS_IO
+
+CS_EXT =>
+    A10 & A11 & CS_IO
+
+CS_IO =>
+    A12 & !A13 & A14 & A15 & P1 & P2
+  # A12 & !A13 & A14 & A15 & P0 & P2
+
+CS_RAMH =>
+    A15 & !CS_IO & !CS_ROM
+
+CS_RAML =>
+    !A15 & !CS_IO & !CS_ROM
+
+CS_ROM =>
+    A13 & !A14 & A15 & P0 & P1 & !RAM_ONLY
+  # A13 & A14 & A15 & P1 & !RAM_ONLY
+  # A12 & !A13 & A14 & A15 & P0 & !P2 & !RAM_ONLY
+  # A12 & !A13 & A14 & A15 & P1 & !P2 & !RAM_ONLY
+
+CS_SID =>
+    A10 & !A11 & CS_IO
+
+CS_VIC =>
+    !A10 & !A11 & CS_IO
+
+CS_CRAM.oe  =>
+    1 
+
+CS_EXT.oe  =>
+    1 
+
+CS_IO.oe  =>
+    1 
+
+CS_RAMH.oe  =>
+    1 
+
+CS_RAML.oe  =>
+    1 
+
+CS_ROM.oe  =>
+    1 
+
+CS_SID.oe  =>
+    1 
+
+CS_VIC.oe  =>
+    1 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    A10                         9        V        -       -       -     
+    A11                         8        V        -       -       -     
+    A12                         7        V        -       -       -     
+    A13                         6        V        -       -       -     
+    A14                         5        V        -       -       -     
+    A15                         4        V        -       -       -     
+ !  CS_CRAM                     13       V        1       7       1     
+ !  CS_EXT                      12       V        1       7       1     
+ !  CS_IO                       16       V        2       7       1     
+ !  CS_RAMH                     18       V        1       7       1     
+ !  CS_RAML                     19       V        1       7       1     
+ !  CS_ROM                      17       V        4       7       1     
+ !  CS_SID                      14       V        1       7       1     
+ !  CS_VIC                      15       V        1       7       1     
+    P0                          1        V        -       -       -     
+    P1                          2        V        -       -       -     
+    P2                          3        V        -       -       -     
+ !  RAM_ONLY                    11       V        -       -       -     
+    CS_CRAM             oe      13       D        1       1       0     
+    CS_EXT              oe      12       D        1       1       0     
+    CS_IO               oe      16       D        1       1       0     
+    CS_RAMH             oe      18       D        1       1       0     
+    CS_RAML             oe      19       D        1       1       0     
+    CS_ROM              oe      17       D        1       1       0     
+    CS_SID              oe      14       D        1       1       0     
+    CS_VIC              oe      15       D        1       1       0     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
+
+===============================================================================
+                                   Fuse Plot
+===============================================================================
+
+Syn   02192 - Ac0   02193 - 
+
+Pin #19  02048  Pol x  02120  Ac1 - 
+ 00000 -------------------------------- 
+ 00032 ---------xx---x----------------- 
+ 00064 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00128 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00160 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18  02049  Pol x  02121  Ac1 - 
+ 00256 -------------------------------- 
+ 00288 --------x-x---x----------------- 
+ 00320 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00352 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00384 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00448 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00480 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17  02050  Pol x  02122  Ac1 - 
+ 00512 -------------------------------- 
+ 00544 x-x-----x----x--x-------------x- 
+ 00576 x-------x---x---x-------------x- 
+ 00608 --x--x--x---x----x--x---------x- 
+ 00640 x----x--x---x----x--x---------x- 
+ 00672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  02051  Pol x  02123  Ac1 - 
+ 00768 -------------------------------- 
+ 00800 x---x---x---x----x--x----------- 
+ 00832 --x-x---x---x----x--x----------- 
+ 00864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00896 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00928 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00960 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00992 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #15  02052  Pol x  02124  Ac1 - 
+ 01024 -------------------------------- 
+ 01056 ---------------x---------x---x-- 
+ 01088 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01120 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01152 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01184 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01216 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14  02053  Pol x  02125  Ac1 - 
+ 01280 -------------------------------- 
+ 01312 ---------------x---------x--x--- 
+ 01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01472 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01504 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #13  02054  Pol x  02126  Ac1 - 
+ 01536 -------------------------------- 
+ 01568 ---------------x--------x----x-- 
+ 01600 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01632 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01664 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01696 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #12  02055  Pol x  02127  Ac1 - 
+ 01792 -------------------------------- 
+ 01824 ---------------x--------x---x--- 
+ 01856 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01920 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01952 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01984 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+
+LEGEND    X : fuse not blown 
+          - : fuse blown 
+
+===============================================================================
+                                 Chip Diagram
+===============================================================================
+
+                               ______________
+                              |  C64MemGAL   |
+                       P0 x---|1           20|---x Vcc                      
+                       P1 x---|2           19|---x !CS_RAML                 
+                       P2 x---|3           18|---x !CS_RAMH                 
+                      A15 x---|4           17|---x !CS_ROM                  
+                      A14 x---|5           16|---x !CS_IO                   
+                      A13 x---|6           15|---x !CS_VIC                  
+                      A12 x---|7           14|---x !CS_SID                  
+                      A11 x---|8           13|---x !CS_CRAM                 
+                      A10 x---|9           12|---x !CS_EXT                  
+                      GND x---|10          11|---x !RAM_ONLY                
+                              |______________|
+

@@ -1,0 +1,88 @@
+Name     ALUdecoder;
+PartNo   00;
+Date     2/11/2025;
+Revision 01;
+Designer Stefan Warnke;
+Company  private;
+Assembly None;
+Location None;
+Device   g22v10;
+
+
+ORDER: CLK, %1, !OE, %1, B3..B0, %1, Cin, %1, A3..A0, %1, Y4..Y0, %1, Cout, %1, X3..X0; 
+
+VECTORS:
+0 1 0000 0 0000 ZZZZZ Z ZZZZ   /*   */
+1 1 0000 0 0000 ZZZZZ Z ZZZZ   /*   */
+C 1 0000 0 0000 ZZZZZ Z ZZZZ   /*   */
+
+0 0 0000 0 0000 LLLLL L LLLL   /*   */
+1 0 0000 0 0000 LLLLL L LLLL   /*   */
+C 0 0000 0 0000 LLLLL L LLLL   /*   */
+					 
+C 0 0000 0 0000 LLLLL L LLLL   /*   */
+C 0 0000 1 0000 LLLLL L LLLL   /*   */
+C 0 0000 0 0001 LLLLL L LLLH   /*   */
+C 0 0000 1 0001 LLLLL L LLLH   /*   */
+C 0 0000 0 0010 LLLLL L LLHL   /*   */
+C 0 0000 1 0010 LLLLL L LLHL   /*   */
+C 0 0000 0 0011 LLLLL L LLHH   /*   */
+C 0 0000 1 0011 LLLLL L LLHH   /*   */
+C 0 0000 0 0100 LLLLL L LHLL   /*   */
+C 0 0000 1 0100 LLLLL L LHLL   /*   */
+C 0 0000 0 0101 LLLLL L LHLH   /*   */
+C 0 0000 1 0101 LLLLL L LHLH   /*   */
+C 0 0000 0 0110 LLLLL L LHHL   /*   */
+C 0 0000 1 0110 LLLLL L LHHL   /*   */
+C 0 0000 0 0111 LLLLL L LHHH   /*   */
+C 0 0000 1 0111 LLLLL L LHHH   /*   */
+					  
+C 0 0000 0 1000 LLLLL L HLLL   /*   */
+C 0 0000 1 1000 LLLLL L HLLL   /*   */
+C 0 0000 0 1001 LLLLL L HLLH   /*   */
+C 0 0000 1 1001 LLLLL L HLLH   /*   */
+C 0 0000 0 1010 LLLLL L HLHL   /*   */
+C 0 0000 1 1010 LLLLL L HLHL   /*   */
+C 0 0000 0 1011 LLLLL L HLHH   /*   */
+C 0 0000 1 1011 LLLLL L HLHH   /*   */
+C 0 0000 0 1100 LLLLL L HHLL   /*   */
+C 0 0000 1 1100 LLLLL L HHLL   /*   */
+C 0 0000 0 1101 LLLLL L HHLH   /*   */
+C 0 0000 1 1101 LLLLL L HHLH   /*   */
+C 0 0000 0 1110 LLLLL L HHHL   /*   */
+C 0 0000 1 1110 LLLLL L HHHL   /*   */
+C 0 0000 0 1111 LLLLL L HHHH   /*   */
+C 0 0000 1 1111 LLLLL L HHHH   /*   */
+
+C 0 0000 0 0000 LLLLL L LLLL   /* ALU_IN=0 cy_in=0 ALU_OUT=00 cy_out=0 */
+C 0 0000 1 0000 LLLLL L LLLL   /* ALU_IN=0 cy_in=1 ALU_OUT=00 cy_out=0 */
+C 0 0001 0 0000 LLLLL H LLLL   /* ALU_IN=1 cy_in=0 ALU_OUT=00 cy_out=1 */
+C 0 0001 1 0000 LLLLL H LLLL   /* ALU_IN=1 cy_in=1 ALU_OUT=00 cy_out=1 */
+C 0 0010 0 0000 LHHHH L LLLL   /* ALU_IN=2 cy_in=0 ALU_OUT=0F cy_out=0 */
+C 0 0010 1 0000 LHHHH L LLLL   /* ALU_IN=2 cy_in=1 ALU_OUT=0F cy_out=0 */
+C 0 0011 0 0000 LHHLL L LLLL   /* ALU_IN=3 cy_in=0 ALU_OUT=0C cy_out=0 */
+C 0 0011 1 0000 LHHLL L LLLL   /* ALU_IN=3 cy_in=1 ALU_OUT=0C cy_out=1 */
+C 0 0100 0 0000 LHHLL L LLLL   /* ALU_IN=4 cy_in=0 ALU_OUT=0C cy_out=0 */
+C 0 0100 1 0000 LHHLL H LLLL   /* ALU_IN=4 cy_in=1 ALU_OUT=0C cy_out=1 */
+C 0 0101 0 0000 LHLLH L LLLL   /* ALU_IN=5 cy_in=0 ALU_OUT=09 cy_out=0 */
+C 0 0101 1 0000 LHLLH L LLLL   /* ALU_IN=5 cy_in=1 ALU_OUT=09 cy_out=0 */
+C 0 0110 0 0000 LHLLH L LLLL   /* ALU_IN=6 cy_in=0 ALU_OUT=09 cy_out=0 */
+C 0 0110 1 0000 LHLLH H LLLL   /* ALU_IN=6 cy_in=1 ALU_OUT=09 cy_out=1 */
+C 0 0111 0 0000 LLHHL H LLLL   /* ALU_IN=7 cy_in=0 ALU_OUT=06 cy_out=0 */
+C 0 0111 1 0000 LLHHL H LLLL   /* ALU_IN=7 cy_in=1 ALU_OUT=06 cy_out=0 */
+C 0 1000 0 0000 LLHHL L LLLL   /* ALU_IN=8 cy_in=0 ALU_OUT=06 cy_out=0 */
+C 0 1000 1 0000 LLHHL H LLLL   /* ALU_IN=8 cy_in=1 ALU_OUT=06 cy_out=1 */
+C 0 1001 0 0000 HHLHL L LLLL   /* ALU_IN=9 cy_in=0 ALU_OUT=1A cy_out=0 */
+C 0 1001 1 0000 HHLHL L LLLL   /* ALU_IN=9 cy_in=1 ALU_OUT=1A cy_out=0 */
+C 0 1010 0 0000 HHLHH L LLLL   /* ALU_IN=A cy_in=0 ALU_OUT=1B cy_out=0 */
+C 0 1010 1 0000 HHLHH L LLLL   /* ALU_IN=A cy_in=1 ALU_OUT=1B cy_out=0 */
+C 0 1011 0 0000 HHHHL L LLLL   /* ALU_IN=B cy_in=0 ALU_OUT=1E cy_out=0 */
+C 0 1011 1 0000 HHHHL L LLLL   /* ALU_IN=B cy_in=1 ALU_OUT=1E cy_out=0 */
+C 0 1100 0 0000 HLHHL L LLLL   /* ALU_IN=C cy_in=0 ALU_OUT=16 cy_out=0 */
+C 0 1100 1 0000 HLHHL L LLLL   /* ALU_IN=C cy_in=1 ALU_OUT=16 cy_out=0 */
+C 0 1101 0 0000 HLLLL L LLLL   /* ALU_IN=D cy_in=0 ALU_OUT=10 cy_out=0 */
+C 0 1101 1 0000 HLLLL L LLLL   /* ALU_IN=D cy_in=1 ALU_OUT=10 cy_out=0 */
+C 0 1110 0 0000 HLHLH L LLLL   /* ALU_IN=E cy_in=0 ALU_OUT=15 cy_out=0 */
+C 0 1110 1 0000 HLHLH L LLLL   /* ALU_IN=E cy_in=1 ALU_OUT=15 cy_out=0 */
+C 0 1111 0 0000 HHHHH L LLLL   /* ALU_IN=F cy_in=0 ALU_OUT=13 cy_out=0 */
+C 0 1111 1 0000 HHHHH H LLLL   /* ALU_IN=F cy_in=1 ALU_OUT=13 cy_out=1 */

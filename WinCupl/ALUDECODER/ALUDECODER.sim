@@ -1,0 +1,160 @@
+%SIGNAL
+PIN   2 =  A0 
+PIN   3 =  A1 
+PIN   4 =  A2 
+PIN   5 =  A3 
+PIN   6 =  B0 
+PIN   7 =  B1 
+PIN   8 =  B2 
+PIN   9 =  B3 
+PIN   1 =  CLK 
+PIN  10 =  Cin 
+PIN  14 = !Cout 
+PIN  13 = !OE 
+PIN  23 =  X0 
+PIN  22 =  X1 
+PIN  21 =  X2 
+PIN  20 =  X3 
+PIN  19 =  Y0 
+PIN  18 =  Y1 
+PIN  17 =  Y2 
+PIN  16 =  Y3 
+PIN  15 =  Y4 
+%END
+
+%FIELD
+FIELD ADDR_IN = A0,A1,A2,A3
+FIELD ADDR_OUT = X0,X1,X2,X3
+FIELD ALU_IN = B0,B1,B2,B3
+FIELD ALU_OUT = Y0,Y1,Y2,Y3,Y4
+FIELD CY_IN = Cin
+FIELD CY_OUT = Cout
+%END
+
+%EQUATION
+Cout.d  =>
+    B0 & !B1 & !B2 & !B3
+  # !B0 & B2 & !B3 & Cin
+  # B0 & B1 & B2 & !B3
+  # !B0 & !B1 & !B2 & B3 & Cin
+  # B0 & B1 & B2 & B3 & Cin
+
+Cout.ar X0.ar X1.ar X2.ar X3.ar Y0.ar Y1.ar Y2.ar Y3.ar Y4.ar  =>
+    0 
+
+Cout.oe  =>
+    !OE
+
+Cout.sp X0.sp X1.sp X2.sp X3.sp Y0.sp Y1.sp Y2.sp Y3.sp Y4.sp  =>
+    0 
+
+X0.d  =>
+    A0
+
+X0.ar  =>
+    
+X0.oe  =>
+    !OE
+
+X0.sp  =>
+    
+X1.d  =>
+    A1
+
+X1.ar  =>
+    
+X1.oe  =>
+    !OE
+
+X1.sp  =>
+    
+X2.d  =>
+    A2
+
+X2.ar  =>
+    
+X2.oe  =>
+    !OE
+
+X2.sp  =>
+    
+X3.d  =>
+    A3
+
+X3.ar  =>
+    
+X3.oe  =>
+    !OE
+
+X3.sp  =>
+    
+Y0.d  =>
+    B0 & B1 & B2 & B3
+  # !B0 & B1
+  # B0 & !B1 & B2 & !B3
+
+Y0.ar  =>
+    
+Y0.oe  =>
+    !OE
+
+Y0.sp  =>
+    
+Y1.d  =>
+    !B0 & !B1 & B2 & B3
+  # !B0 & B1 & !B2
+  # B0 & B1 & B2
+  # !B1 & !B2 & B3
+  # B0 & B1 & !B2 & B3
+
+Y1.ar  =>
+    
+Y1.oe  =>
+    !OE
+
+Y1.sp  =>
+    
+Y2.d  =>
+    !B0 & B1 & B2 & B3
+  # B1 & !B2 & !B3
+  # !B0 & !B1 & B2
+  # B0 & B1 & B2
+  # !B0 & !B1 & !B2 & B3
+  # B0 & B1 & !B2 & B3
+
+Y2.ar  =>
+    
+Y2.oe  =>
+    !OE
+
+Y2.sp  =>
+    
+Y3.d  =>
+    B0 & B1 & B2 & B3
+  # B1 & !B2 & !B3
+  # !B1 & B2 & !B3
+  # !B0 & B1 & B2 & !B3
+  # B0 & !B2 & B3
+  # !B0 & B1 & !B2 & B3
+
+Y3.ar  =>
+    
+Y3.oe  =>
+    !OE
+
+Y3.sp  =>
+    
+Y4.d  =>
+    B0 & B1 & B2 & B3
+  # B0 & !B2 & B3
+  # !B0 & B1 & B3
+  # !B1 & B2 & B3
+
+Y4.ar  =>
+    
+Y4.oe  =>
+    !OE
+
+Y4.sp  =>
+    
+%END

@@ -1,0 +1,215 @@
+{COMPONENT C:\WINCUPL\MYPROJECTS\ALUDECODER2\ALUDECODER.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Sat Aug 16 13:06:28 2025 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P CLK {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P A0 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P A1 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P A2 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P A3 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P B0 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P B1 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P B2 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P B3 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P CIN {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P OE' {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P COUT' {Pt "OUTPUT"}{Lq 0}{Ploc 280 20}}
+   {P Y4 {Pt "OUTPUT"}{Lq 0}{Ploc 280 40}}
+   {P Y3 {Pt "OUTPUT"}{Lq 0}{Ploc 280 60}}
+   {P Y2 {Pt "OUTPUT"}{Lq 0}{Ploc 280 80}}
+   {P Y1 {Pt "OUTPUT"}{Lq 0}{Ploc 280 100}}
+   {P Y0 {Pt "OUTPUT"}{Lq 0}{Ploc 280 120}}
+   {P X3 {Pt "OUTPUT"}{Lq 0}{Ploc 280 140}}
+   {P X2 {Pt "OUTPUT"}{Lq 0}{Ploc 280 160}}
+   {P X1 {Pt "OUTPUT"}{Lq 0}{Ploc 280 180}}
+   {P X0 {Pt "OUTPUT"}{Lq 0}{Ploc 280 200}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 190 270}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 250}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 260 30}
+   {Pnl 260 50}
+   {Pnl 260 70}
+   {Pnl 260 90}
+   {Pnl 260 110}
+   {Pnl 260 130}
+   {Pnl 260 150}
+   {Pnl 260 170}
+   {Pnl 260 190}
+   {Pnl 260 210}
+
+   {Sd A 1 2 3 4 5 6 7 8 9 10 13 14 15 16 17 18 19 20 21 22 23}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 260 250 0}
+   {L 130 240 100 240}
+   {L 130 250 140 240 130 230}
+   {L 130 200 100 200}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 120 20 100 20}
+   {C 125 20 5}
+   {C 255 20 5}
+   {L 260 20 280 20}
+   {L 250 40 280 40}
+   {L 250 60 280 60}
+   {L 250 80 280 80}
+   {L 250 100 280 100}
+   {L 250 120 280 120}
+   {L 250 140 280 140}
+   {L 250 160 280 160}
+   {L 250 180 280 180}
+   {L 250 200 280 200}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "CLK" 140 240}
+   {T "A0" 140 200}
+   {T "A1" 140 180}
+   {T "A2" 140 160}
+   {T "A3" 140 140}
+   {T "B0" 140 120}
+   {T "B1" 140 100}
+   {T "B2" 140 80}
+   {T "B3" 140 60}
+   {T "CIN" 140 40}
+   {T "OE'" 140 20}
+   [Tj "RC"]
+   {T "COUT'" 240 20}
+   {T "Y4" 240 40}
+   {T "Y3" 240 60}
+   {T "Y2" 240 80}
+   {T "Y1" 240 100}
+   {T "Y0" 240 120}
+   {T "X3" 240 140}
+   {T "X2" 240 160}
+   {T "X1" 240 180}
+   {T "X0" 240 200}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "G22V10" 190 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\WINCUPL\MYPROJECTS\ALUDECODER2\ALUDECODER 190 260}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N CLK
+   }
+   {N A0
+   }
+   {N A1
+   }
+   {N A2
+   }
+   {N A3
+   }
+   {N B0
+   }
+   {N B1
+   }
+   {N B2
+   }
+   {N B3
+   }
+   {N CIN
+   }
+   {N OE'
+   }
+   {N COUT'
+   }
+   {N Y4
+   }
+   {N Y3
+   }
+   {N Y2
+   }
+   {N Y1
+   }
+   {N Y0
+   }
+   {N X3
+   }
+   {N X2
+   }
+   {N X1
+   }
+   {N X0
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

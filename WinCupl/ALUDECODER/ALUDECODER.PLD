@@ -1,0 +1,70 @@
+Name     ALUdecoder ;
+PartNo   00 ;
+Date     2/11/2025 ;
+Revision 01 ;
+Designer Stefan Warnke;
+Company  private ;
+Assembly None ;
+Location None ;
+Device   g22v10;
+/*
+https://k1.spdns.de/Develop/Projects/GalAsm/info/galer/jedecfile.html
+https://blog.frankdecaire.com/2017/01/22/generic-array-logic-devices/
+*/
+
+/* *************** INPUT PINS *********************/
+Pin 1 = CLK;
+Pin [2..5] = [A0..3];
+Pin [6..9] = [B0..3];
+Pin 10 = Cin;
+Pin 13 = !OE;
+
+/* *************** OUTPUT PINS *********************/
+Pin [20..23] = [X3..0];
+Pin [15..19] = [Y4..0];
+Pin 14 = !Cout;
+
+FIELD ADDR_IN = [A0..3];
+FIELD ADDR_OUT = [X0..3];
+
+FIELD CY_IN = Cin;
+FIELD CY_OUT = Cout;
+
+FIELD ALU_IN  = [B0..3];
+FIELD ALU_OUT = [Y0..4];
+
+[X3..0].oe = OE;
+[X3..0].ar = 'b'0; 
+[X3..0].sp = 'b'0;
+
+[Y4..0].oe = OE;
+[Y4..0].ar = 'b'0; 
+[Y4..0].sp = 'b'0;
+
+Cout.oe = OE;
+Cout.ar = 'b'0; 
+Cout.sp = 'b'0;
+
+ADDR_OUT.d = ADDR_IN;
+
+CY_OUT.d = ALU_IN:1 # (ALU_IN:4 & CY_IN) # (ALU_IN:6 & CY_IN) # ALU_IN:7 # (ALU_IN:8 & CY_IN) # (ALU_IN:F & CY_IN); 
+
+TABLE ALU_IN => ALU_OUT.d
+{
+	0 => 00;
+	1 => 00;
+	2 => 0F;
+	3 => 0C;
+	4 => 0C;
+	5 => 09;
+	6 => 09;
+	7 => 06;
+	8 => 06;
+	9 => 1A;
+	A => 1B;
+	B => 1E;
+	C => 16;
+	D => 10;
+	E => 15;
+	F => 1F;
+} 

@@ -1,0 +1,52 @@
+LISTING FOR LOGIC DESCRIPTION FILE: C64MEMGAL.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Apr 22 19:45:32 2025
+
+  1:Name     C64MemGAL;
+  2:PartNo   00;
+  3:Date     2/5/2025;
+  4:Revision 01;
+  5:Designer Stefan Warnke;
+  6:Company  private;
+  7:Assembly None;
+  8:Location None;
+  9:Device   g16v8;
+ 10:
+ 11:
+ 12:/* *************** INPUT PINS *********************/
+ 13:Pin [1..3] = [P0..2]; 
+ 14:Pin [4..9] = [A15..10];   
+ 15:Pin 11 = !RAM_ONLY;
+ 16:
+ 17:/* *************** OUTPUT PINS *********************/
+ 18:PIN 19  = !CS_RAML;
+ 19:PIN 18  = !CS_RAMH;
+ 20:
+ 21:PIN 17  = !CS_ROM;
+ 22:PIN 16  = !CS_IO;   
+ 23:  
+ 24:PIN 15  = !CS_VIC;     
+ 25:PIN 14  = !CS_SID;     
+ 26:PIN 13  = !CS_CRAM;     
+ 27:PIN 12  = !CS_EXT;     
+ 28:
+ 29:
+ 30:CS_IO  = A15 & A14 & !A13 & A12 & P2 & !(!P1 & !P0);
+ 31:CS_ROM = ((A15 & !A14 & A13 & P1 & P0) # (A15 & A14 & !A13 & A12 & !P2 & !(!P1 & !P0)) # (A15 & A14 & A13 & P1)) & !RAM_ONLY;
+ 32:CS_RAML = !(CS_IO # CS_ROM) & !A15;
+ 33:CS_RAMH = !(CS_IO # CS_ROM) &  A15;
+ 34:
+ 35:CS_VIC  = CS_IO & !A11 & !A10;
+ 36:CS_SID  = CS_IO & !A11 & A10;
+ 37:CS_CRAM = CS_IO & A11 & !A10;
+ 38:CS_EXT  = CS_IO & A11 & A10;
+ 39:
+ 40:
+
+
+
+Jedec Fuse Checksum       (53a1)
+Jedec Transmit Checksum   (0bb5)

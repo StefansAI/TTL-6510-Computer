@@ -1,0 +1,441 @@
+
+*******************************************************************************
+                                  ALUdecoder
+*******************************************************************************
+
+CUPL(WM)        5.0a Serial# 60008009
+Device          g22v10  Library DLIB-h-40-1
+Created         Sat Aug 16 13:06:28 2025
+Name            ALUdecoder 
+Partno          00 
+Revision        01 
+Date            2/11/2025 
+Designer        Stefan Warnke
+Company         private 
+Assembly        None 
+Location        None 
+
+===============================================================================
+                            Expanded Product Terms
+===============================================================================
+
+ADDR_IN =>
+    A0 , A1 , A2 , A3
+
+ADDR_OUT =>
+    X0 , X1 , X2 , X3
+
+ALU_IN =>
+    B0 , B1 , B2 , B3
+
+ALU_OUT =>
+    Y0 , Y1 , Y2 , Y3 , Y4
+
+CY_IN =>
+    Cin
+
+CY_OUT =>
+    Cout
+
+Cout.d  =>
+    B0 & !B1 & !B2 & !B3
+  # !B0 & B2 & !B3 & Cin
+  # B0 & B1 & B2 & !B3
+  # !B0 & !B1 & !B2 & B3 & Cin
+  # B0 & B1 & B2 & B3 & Cin
+
+Cout.ar  =>
+    0 
+
+Cout.oe  =>
+    OE
+
+Cout.sp  =>
+    0 
+
+X0.d  =>
+    A0
+
+X0.ar  =>
+    0 
+
+X0.oe  =>
+    OE
+
+X0.sp  =>
+    0 
+
+X1.d  =>
+    A1
+
+X1.ar  =>
+    0 
+
+X1.oe  =>
+    OE
+
+X1.sp  =>
+    0 
+
+X2.d  =>
+    A2
+
+X2.ar  =>
+    0 
+
+X2.oe  =>
+    OE
+
+X2.sp  =>
+    0 
+
+X3.d  =>
+    A3
+
+X3.ar  =>
+    0 
+
+X3.oe  =>
+    OE
+
+X3.sp  =>
+    0 
+
+Y0.d  =>
+    B0 & B1 & B2 & B3
+  # !B0 & B1
+  # B0 & !B1 & B2 & !B3
+
+Y0.ar  =>
+    0 
+
+Y0.oe  =>
+    OE
+
+Y0.sp  =>
+    0 
+
+Y1.d  =>
+    !B0 & !B1 & B2 & B3
+  # !B0 & B1 & !B2
+  # B0 & B1 & B2
+  # !B1 & !B2 & B3
+  # B0 & B1 & !B2 & B3
+
+Y1.ar  =>
+    0 
+
+Y1.oe  =>
+    OE
+
+Y1.sp  =>
+    0 
+
+Y2.d  =>
+    !B0 & B1 & B2 & B3
+  # B1 & !B2 & !B3
+  # !B0 & !B1 & B2
+  # B0 & B1 & B2
+  # !B0 & !B1 & !B2 & B3
+  # B0 & B1 & !B2 & B3
+
+Y2.ar  =>
+    0 
+
+Y2.oe  =>
+    OE
+
+Y2.sp  =>
+    0 
+
+Y3.d  =>
+    B0 & B1 & B2 & B3
+  # B1 & !B2 & !B3
+  # !B1 & B2 & !B3
+  # !B0 & B1 & B2 & !B3
+  # B0 & !B2 & B3
+  # !B0 & B1 & !B2 & B3
+
+Y3.ar  =>
+    0 
+
+Y3.oe  =>
+    OE
+
+Y3.sp  =>
+    0 
+
+Y4.d  =>
+    B0 & B1 & B2 & B3
+  # B0 & !B2 & B3
+  # !B0 & B1 & B3
+  # !B1 & B2 & B3
+
+Y4.ar  =>
+    0 
+
+Y4.oe  =>
+    OE
+
+Y4.sp  =>
+    0 
+
+
+===============================================================================
+                                 Symbol Table
+===============================================================================
+
+Pin Variable                                    Pterms   Max     Min    
+Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
+--- --------            ---     ---     ----    ------  ------  -----   
+
+    A0                          2        V        -       -       -     
+    A1                          3        V        -       -       -     
+    A2                          4        V        -       -       -     
+    A3                          5        V        -       -       -     
+    ADDR_IN                     0        F        -       -       -     
+    ADDR_OUT                    0        F        -       -       -     
+    ALU_IN                      0        F        -       -       -     
+    ALU_OUT                     0        F        -       -       -     
+    B0                          6        V        -       -       -     
+    B1                          7        V        -       -       -     
+    B2                          8        V        -       -       -     
+    B3                          9        V        -       -       -     
+    CLK                         1        V        -       -       -     
+    CY_IN                       0        F        -       -       -     
+    CY_OUT                      0        F        -       -       -     
+    Cin                         10       V        -       -       -     
+ !  Cout                        14       V        -       -       -     
+ !  Cout                d       14       X        5       8       1     
+    Cout                ar      14       X        1       1       1     
+    Cout                oe      14       X        1       1       1     
+    Cout                sp      14       X        1       1       1     
+ !  OE                          13       V        -       -       -     
+    X0                          23       V        -       -       -     
+    X0                  d       23       X        1       8       1     
+    X0                  ar      23       X        1       1       1     
+    X0                  oe      23       X        1       1       1     
+    X0                  sp      23       X        1       1       1     
+    X1                          22       V        -       -       -     
+    X1                  d       22       X        1       10      1     
+    X1                  ar      22       X        1       1       1     
+    X1                  oe      22       X        1       1       1     
+    X1                  sp      22       X        1       1       1     
+    X2                          21       V        -       -       -     
+    X2                  d       21       X        1       12      1     
+    X2                  ar      21       X        1       1       1     
+    X2                  oe      21       X        1       1       1     
+    X2                  sp      21       X        1       1       1     
+    X3                          20       V        -       -       -     
+    X3                  d       20       X        1       14      1     
+    X3                  ar      20       X        1       1       1     
+    X3                  oe      20       X        1       1       1     
+    X3                  sp      20       X        1       1       1     
+    Y0                          19       V        -       -       -     
+    Y0                  d       19       X        3       16      1     
+    Y0                  ar      19       X        1       1       1     
+    Y0                  oe      19       X        1       1       1     
+    Y0                  sp      19       X        1       1       1     
+    Y1                          18       V        -       -       -     
+    Y1                  d       18       X        5       16      1     
+    Y1                  ar      18       X        1       1       1     
+    Y1                  oe      18       X        1       1       1     
+    Y1                  sp      18       X        1       1       1     
+    Y2                          17       V        -       -       -     
+    Y2                  d       17       X        6       14      1     
+    Y2                  ar      17       X        1       1       1     
+    Y2                  oe      17       X        1       1       1     
+    Y2                  sp      17       X        1       1       1     
+    Y3                          16       V        -       -       -     
+    Y3                  d       16       X        6       12      1     
+    Y3                  ar      16       X        1       1       1     
+    Y3                  oe      16       X        1       1       1     
+    Y3                  sp      16       X        1       1       1     
+    Y4                          15       V        -       -       -     
+    Y4                  d       15       X        4       10      1     
+    Y4                  ar      15       X        1       1       1     
+    Y4                  oe      15       X        1       1       1     
+    Y4                  sp      15       X        1       1       1     
+
+
+LEGEND    D : default variable         F : field      G : group
+          I : intermediate variable    N : node       M : extended node
+          U : undefined                V : variable   X : extended variable
+          T : function
+
+
+===============================================================================
+                                   Fuse Plot
+===============================================================================
+
+SP 
+ 05764 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+AR 
+ 00000 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+Pin #23  05808 Mode  -x 
+ 00044 -------------------------------------------x 
+ 00088 ----x--------------------------------------- 
+ 00132 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00176 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00220 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00264 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00308 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00352 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00396 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #22  05810 Mode  -x 
+ 00440 -------------------------------------------x 
+ 00484 --------x----------------------------------- 
+ 00528 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00572 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00616 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00660 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00704 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00748 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00792 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00836 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 00880 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #21  05812 Mode  -x 
+ 00924 -------------------------------------------x 
+ 00968 ------------x------------------------------- 
+ 01012 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01056 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01100 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01144 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01188 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01232 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01276 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01320 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01364 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01408 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01452 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #20  05814 Mode  -x 
+ 01496 -------------------------------------------x 
+ 01540 ----------------x--------------------------- 
+ 01584 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01628 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01672 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01716 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01804 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01848 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01892 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01936 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 01980 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02024 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02068 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02112 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #19  05816 Mode  -x 
+ 02156 -------------------------------------------x 
+ 02200 --------------------x---x---x---x----------- 
+ 02244 ---------------------x--x------------------- 
+ 02288 --------------------x----x--x----x---------- 
+ 02332 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02420 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02464 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02508 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02552 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02596 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02640 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02684 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02728 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02772 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02816 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 02860 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18  05818 Mode  -x 
+ 02904 -------------------------------------------x 
+ 02948 ---------------------x---x--x---x----------- 
+ 02992 ---------------------x--x----x-------------- 
+ 03036 --------------------x---x---x--------------- 
+ 03080 -------------------------x---x--x----------- 
+ 03124 --------------------x---x----x--x----------- 
+ 03168 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03212 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03256 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03300 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03388 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03432 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03476 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03520 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03564 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 03608 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17  05820 Mode  -x 
+ 03652 -------------------------------------------x 
+ 03696 ---------------------x--x---x---x----------- 
+ 03740 ------------------------x----x---x---------- 
+ 03784 ---------------------x---x--x--------------- 
+ 03828 --------------------x---x---x--------------- 
+ 03872 ---------------------x---x---x--x----------- 
+ 03916 --------------------x---x----x--x----------- 
+ 03960 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04004 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04048 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04092 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04136 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04180 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04268 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #16  05822 Mode  -x 
+ 04312 -------------------------------------------x 
+ 04356 --------------------x---x---x---x----------- 
+ 04400 ------------------------x----x---x---------- 
+ 04444 -------------------------x--x----x---------- 
+ 04488 ---------------------x--x---x----x---------- 
+ 04532 --------------------x--------x--x----------- 
+ 04576 ---------------------x--x----x--x----------- 
+ 04620 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04664 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04708 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04752 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04796 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 04840 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #15  05824 Mode  -x 
+ 04884 -------------------------------------------x 
+ 04928 --------------------x---x---x---x----------- 
+ 04972 --------------------x--------x--x----------- 
+ 05016 ---------------------x--x-------x----------- 
+ 05060 -------------------------x--x---x----------- 
+ 05104 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05148 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05192 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05236 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05280 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05324 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #14  05826 Mode  xx 
+ 05368 -------------------------------------------x 
+ 05412 --------------------x----x---x---x---------- 
+ 05456 ---------------------x------x----x--x------- 
+ 05500 --------------------x---x---x----x---------- 
+ 05544 ---------------------x---x---x--x---x------- 
+ 05588 --------------------x---x---x---x---x------- 
+ 05632 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05676 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+ 05720 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+
+
+LEGEND    X : fuse not blown 
+          - : fuse blown 
+
+===============================================================================
+                                 Chip Diagram
+===============================================================================
+
+                               ______________
+                              |  ALUdecoder  |
+                      CLK x---|1           24|---x Vcc                      
+                       A0 x---|2           23|---x X0                       
+                       A1 x---|3           22|---x X1                       
+                       A2 x---|4           21|---x X2                       
+                       A3 x---|5           20|---x X3                       
+                       B0 x---|6           19|---x Y0                       
+                       B1 x---|7           18|---x Y1                       
+                       B2 x---|8           17|---x Y2                       
+                       B3 x---|9           16|---x Y3                       
+                      Cin x---|10          15|---x Y4                       
+                          x---|11          14|---x !Cout                    
+                      GND x---|12          13|---x !OE                      
+                              |______________|
+

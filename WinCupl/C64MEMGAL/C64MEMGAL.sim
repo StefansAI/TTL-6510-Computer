@@ -1,0 +1,78 @@
+%SIGNAL
+PIN   9 =  A10 
+PIN   8 =  A11 
+PIN   7 =  A12 
+PIN   6 =  A13 
+PIN   5 =  A14 
+PIN   4 =  A15 
+PIN  13 = !CS_CRAM 
+PIN  12 = !CS_EXT 
+PIN  16 = !CS_IO 
+PIN  18 = !CS_RAMH 
+PIN  19 = !CS_RAML 
+PIN  17 = !CS_ROM 
+PIN  14 = !CS_SID 
+PIN  15 = !CS_VIC 
+PIN   1 =  P0 
+PIN   2 =  P1 
+PIN   3 =  P2 
+PIN  11 = !RAM_ONLY 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CS_CRAM =>
+    !A10 & A11 & !CS_IO
+
+CS_EXT =>
+    A10 & A11 & !CS_IO
+
+CS_IO =>
+    A12 & !A13 & A14 & A15 & P1 & P2
+  # A12 & !A13 & A14 & A15 & P0 & P2
+
+CS_RAMH =>
+    A15 & CS_IO & CS_ROM
+
+CS_RAML =>
+    !A15 & CS_IO & CS_ROM
+
+CS_ROM =>
+    A13 & !A14 & A15 & P0 & P1 & RAM_ONLY
+  # A13 & A14 & A15 & P1 & RAM_ONLY
+  # A12 & !A13 & A14 & A15 & P0 & !P2 & RAM_ONLY
+  # A12 & !A13 & A14 & A15 & P1 & !P2 & RAM_ONLY
+
+CS_SID =>
+    A10 & !A11 & !CS_IO
+
+CS_VIC =>
+    !A10 & !A11 & !CS_IO
+
+CS_CRAM.oe  =>
+    1 
+
+CS_EXT.oe  =>
+    1 
+
+CS_IO.oe  =>
+    1 
+
+CS_RAMH.oe  =>
+    1 
+
+CS_RAML.oe  =>
+    1 
+
+CS_ROM.oe  =>
+    1 
+
+CS_SID.oe  =>
+    1 
+
+CS_VIC.oe  =>
+    1 
+
+%END

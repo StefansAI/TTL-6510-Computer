@@ -1,0 +1,92 @@
+LISTING FOR LOGIC DESCRIPTION FILE: ALUDECODER.pld                   Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 16 13:06:28 2025
+
+  1:Name     ALUdecoder ;
+  2:PartNo   00 ;
+  3:Date     2/11/2025 ;
+  4:Revision 01 ;
+  5:Designer Stefan Warnke;
+  6:Company  private ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   g22v10;
+ 10:/*
+ 11:https://k1.spdns.de/Develop/Projects/GalAsm/info/galer/jedecfile.html
+ 12:https://blog.frankdecaire.com/2017/01/22/generic-array-logic-devices/
+ 13:*/
+ 14:
+ 15:/* *************** INPUT PINS *********************/
+ 16:Pin 1 = CLK;
+ 17:Pin [2..5] = [A0..3];
+ 18:Pin [6..9] = [B0..3];
+ 19:Pin 10 = Cin;
+ 20:Pin 13 = !OE;
+ 21:
+ 22:/* *************** OUTPUT PINS *********************/
+ 23:Pin [20..23] = [X3..0];
+ 24:Pin [15..19] = [Y4..0];
+ 25:Pin 14 = !Cout;
+ 26:
+ 27:FIELD ADDR_IN = [A0..3];
+ 28:FIELD ADDR_OUT = [X0..3];
+ 29:
+ 30:FIELD CY_IN = Cin;
+ 31:FIELD CY_OUT = Cout;
+ 32:
+ 33:FIELD ALU_IN  = [B0..3];
+ 34:FIELD ALU_OUT = [Y0..4];
+ 35:
+ 36:[X3..0].oe = OE;
+ 37:[X3..0].ar = 'b'0; 
+ 38:[X3..0].sp = 'b'0;
+ 39:
+ 40:[Y4..0].oe = OE;
+ 41:[Y4..0].ar = 'b'0; 
+ 42:[Y4..0].sp = 'b'0;
+ 43:
+ 44:Cout.oe = OE;
+ 45:Cout.ar = 'b'0; 
+ 46:Cout.sp = 'b'0;
+ 47:
+ 48:ADDR_OUT.d = ADDR_IN;
+ 49:
+ 50:CY_OUT.d = ALU_IN:1 # (ALU_IN:4 & CY_IN) # (ALU_IN:6 & CY_IN) # ALU_IN:7 # (ALU_IN:8 & CY_IN) # (ALU_IN:F & CY_IN); 
+ 51:
+ 52:TABLE ALU_IN => ALU_OUT.d
+ 53:{
+
+LISTING FOR LOGIC DESCRIPTION FILE: ALUDECODER.pld                   Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Sat Aug 16 13:06:28 2025
+
+ 54:        0 => 00;
+ 55:        1 => 00;
+ 56:        2 => 0F;
+ 57:        3 => 0C;
+ 58:        4 => 0C;
+ 59:        5 => 09;
+ 60:        6 => 09;
+ 61:        7 => 06;
+ 62:        8 => 06;
+ 63:        9 => 1A;
+ 64:        A => 1B;
+ 65:        B => 1E;
+ 66:        C => 16;
+ 67:        D => 10;
+ 68:        E => 15;
+ 69:        F => 1F;
+ 70:} 
+ 71:
+ 72:
+
+
+
+Jedec Fuse Checksum       (e692)
+Jedec Transmit Checksum   (7d60)
