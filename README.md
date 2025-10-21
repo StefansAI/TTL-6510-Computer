@@ -9,7 +9,7 @@
 I know, this is not the first TTL CPU/Computer and not the last. But I got interested in designing my own TTL-CPU after a friend showed me his <a href="https://eater.net/8bit/">"Ben Eater 8bit Computer"</a> setup. I really liked the educational part of it, even though the CPU is very limited. I then looked into the <a href="https://gigatron.io/">"Gigatron - TTL microcomputer"</a>, which is a clever RISC-like design. <br>
 Both CPU designs had not been modeled after any existing CPU architecture. Because of its nature, the Gigatron doesn't even require any micro code. It runs fast, but it also doesn't support any register display. Ben Eater's design supports binary and hex-displays, but is very limited and slow. <br>
 For my own design I wanted to imitate a real existing CPU, allowing for extensive debug and display options as well as running it as fast as the original. A simple and very common CPU of the past was the <a href="https://en.wikipedia.org/wiki/MOS_Technology_6502">MOS 6502</a> with its variant 6510 running in the <a href="https://en.wikipedia.org/wiki/Commodore_64">Commodore C64</a>. Even though I liked <a href="https://en.wikipedia.org/wiki/Zilog">Zilog</a>, the complexity of the <a href="https://en.wikipedia.org/wiki/Zilog_Z80">Z80 CPU </a>was much higher and harder to bring on a board like this. However, here is a project that implements both if of interest: <a href="https://hackaday.io/project/190345-isetta-ttl-computer">Isetta TTL computer</a><br>
-To allow for extensive register displays, I added headers where smaller boards can be plugged in for single steps updates. They can be removed for full speed. A special logic also allows single instruction steps, single clock phase steps. For the last mode I found it better to replace the 8-bit hex display boards for the instruction register and the micro codes with special LCD module controllers displaying text lines in addition to the codes.<br>
+To allow for extensive register displays, I added headers where smaller boards can be plugged in for single step updates. They can be removed for full speed. A special logic also allows single instruction steps, single clock phase steps. For the last mode I found it better to replace the 8-bit hex display boards for the instruction register and the micro codes with special LCD module controllers displaying text lines in addition to the codes.<br>
 I tried to stick to <a href="https://en.wikipedia.org/wiki/List_of_7400-series_integrated_circuits#Larger_footprints">74xx logic chips</a>, mainly the HCT series. But I had to do some exceptions. I wanted to use real <a href="https://en.wikipedia.org/wiki/74181">ALU chips</a> (because I always wanted to do something with these) and had to settle to the 74LS181, which is still available. I also had to use two <a href="https://en.wikipedia.org/wiki/Generic_Array_Logic">GALs</a>, one for the C64-like chip select decoder for memories and IOs (part of a PAL in the C64). And I had to introduce the second GAL for remapping the ALU codes because I ran out of micro code bits. Now it maps 4-bit codes plus CY to 5 ALU selection bits plus carry-in. I had to resist the temptation to replace more logic with GALs. The extreme would have been implementing the whole board into an <a href="https://en.wikipedia.org/wiki/Field-programmable_gate_array">FPGA</a>, which was not the goal :-).<br>
 The goal was to create a design that comes as close to the internal processor functionality as possible, including timing. Since the hardware is not exactly the same, the micro code execution does not match 100%. But the general execution comes close and all instructions take the same number of clocks as the original. In very few cases dummy micro steps had to be included to meet the target. The only exceptions, where the original timing could not be met, are the ADC and SBC instructions in BCD mode. As far as I could find out, these are seldomly used, so this mode was implemented with more micro steps instead of more hardware.<br>
 There is a great chip simulator <a href="http://www.visual6502.org/JSSim/expert.html">here</a>.
@@ -36,7 +36,7 @@ At the bottom of the block diagram is just a hint to the exception handler, inst
 </div>
 <br>
 While there is nothing special about the reset part, there is a bit more than just a clock generator. First, there are 2 clock sources to chose from. The crystal one for normal speed and the 555 timer for slow speeds down to seconds. The last one makes it fun to watch clock by clock execution with all displays.<br>
-The crystal is four times the CPU clock of 1MHz in the C64. The board might run much faster, but that will have to be tested out. There are 2 JK-flip-flops to divide the crystal clock by 2 and 4. The last one is sampled and goes out as PHI2 as in the origional 6502 processor system.<br>
+The crystal is four times the CPU clock of 1MHz in the C64. The board might run much faster, but that will have to be tested out. There are 2 JK-flip-flops to divide the crystal clock by 2 and 4. The last one is sampled and goes out as PHI2 as in the original 6502 processor system.<br>
 Everything else is for creating single step modes for instructions or clock phases. Since the whole TTL processor is completely static, its clock can be paused indefinitely. This fact is used to implement single instruction steps or single clock phase steps. Let's check with <a href="https://github.com/StefansAI/SimTTL">SimTTL</a>.
 <br>
 <br>
@@ -80,15 +80,17 @@ Something that can be found in several parts of the schematics are female header
   <img src="docs/assets/images/page_3/jsr_rts.png"/>
 </div>
 <br>
-The <a href="https://github.com/StefansAI/SimTTL">SimTTL</a> screen shot above shows the JSR and RTS instructions, which exercise incrementing, saving and loading of PC contents. The rising edge of /LD_IR captures the iDB contents into IR (red trigger marker, yellow marker and light blue marker). In each of these cases, the PC is incremented with the rising edge of /2CLK (falling edge of 2CLK). The JSR instruction is loaded from 0xFE41, then the low part of the JSR address from 0xFE42 (first blue marker) and the high part from 0xFE43 (second blue marker). The two parts of the PC are then written to the stack (next 2 blue marker, where R/W is low). The following blue marker is placed at the rising edge of /LD_PC_H, which loads AL and iDB into the PC to output the new execution address (0xFE01). The RTS instruction is then loaded from there (yellow marker). While the address bus continues to put out the PC of 0xFE02 for internal phases until the return address is read from the stack at the next 2 blue markers and loaded to AL and then to PCH and PCL simultanously. The return address is then incremented in the next phase before the execution can be continued fetching the next instruction from 0xFE44, the instruction after the JSR 0xFE01 instruction.
+The <a href="https://github.com/StefansAI/SimTTL">SimTTL</a> screenshot above shows the JSR and RTS instructions, which exercise incrementing, saving and loading of PC contents. The rising edge of /LD_IR captures the iDB contents into IR (red trigger marker, yellow marker and light blue marker). In each of these cases, the PC is incremented with the rising edge of /2CLK (falling edge of 2CLK). The JSR instruction is loaded from 0xFE41, then the low part of the JSR address from 0xFE42 (first blue marker) and the high part from 0xFE43 (second blue marker). The two parts of the PC are then written to the stack (next 2 blue marker, where R/W is low). The following blue marker is placed at the rising edge of /LD_PC_H, which loads AL and iDB into the PC to output the new execution address (0xFE01). The RTS instruction is then loaded from there (yellow marker). While the address bus continues to put out the PC of 0xFE02 for internal phases until the return address is read from the stack at the next 2 blue markers and loaded to AL and then to PCH and PCL simultanously. The return address is then incremented in the next phase before the execution can be continued fetching the next instruction from 0xFE44, the instruction after the JSR 0xFE01 instruction.
 <br>
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/page_3/mc_jsr.png"/>
+</div>
+<div style="text-align: center;">
   <img src="docs/assets/images/page_3/mc_rts.png"/>
 </div>
 <br>
-Let's have a look at the <a href="https://github.com/StefansAI/MicroCodeGenerator">MicroCodeGenerator</a> application, where the sequences for all instructions are defined. Here are the screen shots for the two instructions JSR and RTS. It can be cross-referenced with the SimTTL screen shots. MC corresponds to T0, T1, T2,... and iPHI2 to the phase Tn_0 or Tn_1.
+Let's have a look at the <a href="https://github.com/StefansAI/MicroCodeGenerator">MicroCodeGenerator</a> application, where the sequences for all instructions are defined. Here are the screenshots for the two instructions JSR and RTS. It can be cross-referenced with the SimTTL screenshots. MC corresponds to T0, T1, T2,... and iPHI2 to the phase Tn_0 or Tn_1.
 <br>
 <h4 style="text-align: center;">Page 4: Address Register</h4>
 <br>
@@ -135,15 +137,127 @@ The reverse is now happening at the PLA instruction between the yellow marker an
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/page_5/mc_pha.png"/>
+</div>
+<div style="text-align: center;">
   <img src="docs/assets/images/page_5/mc_pla.png"/>
 </div>
 <br>
-Here are the micro code definition for the two instructions shown above, PHA and PLA. It can be followed, what signals are activated when.
+Here are the micro code definitions for the two instructions shown above, PHA and PLA. It can be followed, what signals are activated when.
+<br>
+<br>
+<h4 style="text-align: center;">Page 6: Registers and DB driver</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_6/regs_db.png"/>
+</div>
+<br>
+Page 6 contains the registers A, X and Y as well as the data bus driver between external and internal data bus. Again, the headers for the <a href="https://github.com/StefansAI/HexDisplayController">HexDisplayControllers</a> are added here. It looks straight forward.<br>
+Just as a side note, the last page of the schematics has shadow registers just for SimTTL. They are loaded in parallel to the real registers here, but their outputs are always active to show the contents in simTTL. These shadow registers don't appear in the BOM nor do they exist on the board. They show up in SimTTL as REG_A, REG_X and REG_Y (see below)
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_6/regs.png"/>
+</div>
+<br>
+Here is the code for this example:
+<div class="box"><pre>
+FE02  A9 A5                      LDA #$A5
+FE04  AA                         TAX
+FE05  A0 00                      LDY #$00
+FE07  98                         TYA
+FE08  A0 33                      LDY #$33
+FE0A  85 10                      STA $10
+</pre></div>
+The first instruction (LDA #$A5) starts at the red marker. As in the PLA example above, the immediate value of $A5 is read from memory, placed onto the internal data bus when /OE_iDB=L and loaded into ALU_A at /LD_ALU_A=L. In the next phase /OE_ALU is activated and then loaded into A. At the same moment the NZ and ZF flags are changed. In this case NF is set and ZF is reset.<br>
+The next instruction TAX activates /OE_A and again the data is loaded into ALU_A again and then into X via /LD_X.<br>
+In result of LDY #$00, the zero flag (ZF) is set and the negativae flag (NF) is reset. With the next LDY #$33, resets ZF, since the value is not zero.<br>
+The last instruction is STA $10, storing A to the zero page location 0x0010. This address is put out onto the address bus, then /OUT_DIR and /OE_A are activated and then R/W to write the contents to the external memory.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_6/mc_lda_tax.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_6/mc_ldy.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_6/mc_tya.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_6/mc_sta.png"/>
+</div>
+<br>
+Above are the screenshots of all instructions used above as reference.
+<br>
+<br>
+<h4 style="text-align: center;">Page 7: Micro Code Sequencer</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_7/micro_code_sequencer.png"/>
+</div>
+<br>
+There are 2 ROMs in parallel to produce 16 bit wide micro codes. An instruction register provides 8 bit of the address. But the micro steps are created by a 4-bit counter and a clock phase. This together allow for 5-bit for the micro steps, giving 16 clocks or 32 phases for each instruction. The 6502 would normally only use up to 7 clocks per instruction. But since I decided to implement BCD calculations with more micro steps instead of more hardware, I gave one more bit to the micro steps.<br>
+If you look closer, the instruction and the micro steps generate 13 bits of the address bus. That leaves 4 bits for additional conditions. The highest bit is reserved for exceptions, like interrupts and reset, because they will get the highest priority. Then there are 3 bits split into any special condition, then full carry and half carry which also can have double meaning. Those bits are generated for address calculations, branch conditions or BCD handling.<br>
+The 16-bit outputs are then grouped into the following:<br>
+- Address output<br>
+- Internal databus enable<br>
+- Load internal register<br>
+- ALU-code<br>
+Originally there were just 2 identical registers to capture the ROM outputs. But when I ran out out bits, I decided to replace one register with a GAL. This GAL not only acts as a register, it also expands the 4-bit ALU codes plus CF from the ROM into 5-bit ALU function bits plus CIN. This is possible since the ALU chips have more functions than actually needed for the 6510 computer.<br>
+The GAL projects are made with <a href="https://www.microchip.com/en-us/development-tool/WinCUPL">WinCupl</a> and the source codes are part of the project in <a href="https://github.com/StefansAI/TTL-6510-Computer/tree/main/WinCupl/ALUDECODER">GitHub.</a>
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_7/jump_ds.png"/>
+</div>
+<br>
+In <a href="https://github.com/StefansAI/SimTTL">SimTTL</a> the execution of the JMP instruction looks like this. The Micro Code counter (MC) is the input into the ROMs. But there is a latency of one phase, I added "REG_MC" to sample MC with the same latency. "REG_MC" directly corresponds now to T1,T2,T3 etc. There is a low pulse of /LD_IR at the end of the "LSR A" loading the instruction register (IR) with "0x4C" and incrementing PC, thus starting the execution of the "JMP abs" instruction. <br> 
+At the end of T1 "/LD_AL" loads 0x7C from the internal databus (iDB) into the AL register. AL is a transparent D-Latch and that's why the output changes shortly after activating the load signal. At T2_1, the signal "/LD_PC_H" is activated and 0xFE is loaded from iDB into PC_H with the rising edge. At the same edge PC_L is loaded from AL, so PC is now 0xFE7C. T3_1 now loads the next instruction (EOR abs).
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_7/jmp_example.png"/>
+</div>
+<br>
+Again, here is the micro code for JMP and EOR.
+<br>
+<br>
+<h4 style="text-align: center;">Page 8: Instruction Decoder</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_8/instruction_decoder.png"/>
+</div>
+<br>
+The instruction decoder is simply passing the bit groups to cascaded decoder chips. But in addition, signal combinations are often needed in all groups and a couple of AND-gates become low-active if one of the inputs are low-active. The blue texts at decoder outputs correspond to the selector name in <a href="https://github.com/StefansAI/MicroCodeGenerator">MicroCodeGenerator</a>. The final signal label appears right to it or the additional gates.<br>
+The first decoder is responsible for the address bus selection. One input to enable the decoder is /AEC. Another bus user (i.e. VIC) can steal the low phase of PHI2 to use the bus while the high phase is still available for the CPU.<br>
+The next group creates the load signals. Here the low phase of /2CLK enables the decoders to create better defined timing. There are still delays through the AND-gates. The very first output is left blank to allow for a no-load-code.<br>
+It's beneficial (and common) to load the ALU_A register directly from the ALU output again for next operations. To implement this, the signal /OE_ALU again combined with /2CLK feeds into the final signal /LD_ALU_A. But it can be prohibited via DEC_COND (decimal coondition) for BCD corrections.<br>
+The largest group is the output enable signal group with 5-bit. But instead of the possible 32 decoded outputs, only 24 were needed here. Since there was still one code needed to not enable any output at all, the decoders are wired in a way that the 24 outputs start at input code 8, leaving 0..7 as no-output-enable.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_8/adc_abs_x.png"/>
+</div>
+<br>
+The SimTTL screenshot shows the execution of two "ADC abs,X" instructions back-to-back (first starting at red marker, second at yellow marker ending at light blue). The second one calculates a data address with a carry from the low part of the address to the high part. According to the 6502 documentation an additional clock is inserted after the low part addition to increment the high part as correction. In the screenshot, the signal FCY_COND is activated to switch the micro code execution to the increment portion.<br>
+Here is the code, including the preparation before ADC.
+<div class="box"><pre>
+FE1E  A2 66                      LDX #$66
+FE20  A0 67                      LDY #$67
+FE22  A9 12                      LDA #$12
+                                 ; Testing Op Codes
+FE24  7D 34 12                   ADC $1234,X
+FE27  7D F4 12                   ADC $12F4,X
+</pre></div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_8/mc_adc.png"/>
+</div>
+<br>
+The MicroCodeGenerator screenshot shows both micro code definitions. The execution starts with FCY_COND=L and switches over, when it transitions to high executing the increment in the ALU and ending a clock later.<br>
+In T1_1 the code for /LD_ALU_AB actually activates /LD_ALU_A and /LD_ALU_B simultanously through the AND-gates. Since /OE_X is active, the contents of register X is loaded into ALU_A, while at the same time the low part of the absolute address ($34 or $F4) is loaded into ALU_B.<br>
+In T2_0 the signal /OE_ALU_FDCY is activated, which results in capturing the CY flag and setting FCY_COND accordingly. Details follow later on page 12.
 
-
-
-
-<br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 <br>
 <h4 style="text-align: center;">Status</h4>
 <br>
