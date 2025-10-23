@@ -255,7 +255,109 @@ FE27  7D F4 12                   ADC $12F4,X
 <br>
 The MicroCodeGenerator screenshot shows both micro code definitions. The execution starts with FCY_COND=L and switches over, when it transitions to high executing the increment in the ALU and ending a clock later.<br>
 In T1_1 the code for /LD_ALU_AB actually activates /LD_ALU_A and /LD_ALU_B simultanously through the AND-gates. Since /OE_X is active, the contents of register X is loaded into ALU_A, while at the same time the low part of the absolute address ($34 or $F4) is loaded into ALU_B.<br>
-In T2_0 the signal /OE_ALU_FDCY is activated, which results in capturing the CY flag and setting FCY_COND accordingly. Details follow later on page 12.
+In T2_0 the signal /OE_ALU_FDCY is activated, which results in capturing the CY flag and setting FCY_COND accordingly. Details follow later on page 12. <br>
+It is important to keep in mind that there is always 1 phase latency between the iput of the ROM and the outut sampling. When the FCY_COND signal is changing, it can only assumed to switch over to the other code track one clock phase later. <br>
+<br>
+<br>
+<h4 style="text-align: center;">Page 9: Exception Handling</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/exception_handling.png"/>
+</div>
+<br>
+This part takes care of handling the exceptions /RESET, /NMI and /INT. These signals interrupt the current execution in different ways. <br>
+<b>Reset:</b><br>
+Reset has the highest priority, interrupting everything immediately after activation. As long as /RESET is kept low, the whole processor will be held in reset until execution can start with the transition to high. That rising edge forces the exception handling immediately.<br>
+<b>NMI:</b><br>
+The non-maskable interrupt (NMI) is activated by the falling edge, which is detected in the first FF and the OR-gate to activate the /NMI_BIT. The JK-FF will deactivate /NMI_BIT with the next /LD_IR after the NMI exception code had been executed (/EXC=L, IR1=L, which is the sampled /NMI_BIT). This way an NMI can occur while INT-exception is handled, so that the NMI handling follows immediately.<br>
+<b>INT:</b><br>
+The maskable interrupt has the lowest priority and has to be held low until handled. This happens with the next falling edge of /LD_IR if the interrupt had been enabled. <br><br>
+In any of these exception cases the signal /ACT_EXC will be activated and then sampled with /LD_IR to create the signal EXC indicating the exception execution. At the same moment all three exception bits (/RES_BIT, /NMI_BIT and /INT_BIT) will be sampled into an alternative instruction register to replace the main instruction register contents as long as EXC is active.<br>
+To ensure getting back to the original PC for the next instruction after interrupt handling, a special signal INHIBIT_PC++ is generated to disable the increment when /LD_IR is active.<br>
+As described in <a href="https://en.wikipedia.org/wiki/Interrupts_in_65xx_processors">Interrupts in 65xx processors</a> each of these exceptions has to fetch an address from the vector table:
+<table class="center">
+  <tr>
+    <th>Exception</th>
+    <th>Vector Low</th>
+    <th>Vector High</th>
+  </tr>
+  <tr>
+    <td>INT</td>
+    <td>0xFFFE</td>
+    <td>0xFFFF</td>
+  </tr>
+  <tr>
+    <td>RESET</td>
+    <td>0xFFFC</td>
+    <td>0xFFFD</td>
+  </tr>
+  <tr>
+    <td>NMI</td>
+    <td>0xFFFA</td>
+    <td>0xFFFB</td>
+  </tr>
+</table>
+The hardware has to generate these addresses for the vector table. The pull-up resistor array will take care of any 0xFF on the internal databus. The lowest 4 bits are coming from the micro codes MC_OUT_12..15 latched into the HCT173 when /OE_BRKL is active. These bits are normally repsonsible for the ALU function codes, so the micro codes have to select some ALU selection that creates the correct 4 bits for the vector table address access.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/reset.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/mc_reset.png"/>
+</div>
+<br>
+Here is the reset timing and the micro code from the rising edge of /RESET on (red marker). IR shows the value 0x06, which means /RES_BIT is low and /NMI_BIT and /INT_BIT are high. The disassembler interprets it wrongly as ASL zpg, so ignore it here.<br> At the first blue marker the low address part for the vector table (0xFC) is read from iDB and loaded into AL. It is followed by reading 0xFF and loading it together with AL into the address register AR. Next, the address 0xFFFC is appearing on the address bus and the value 0x02 is read from the vector table. AR is incremented and 0xFE is now read loaded into PC together with AL. The PC is set to the reset execution address of 0xFE02 in this case. <br>Before starting there, the stack pointer SP is loaded to 0xFF and the <a href="https://www.nesdev.org/wiki/Status_flags#:~:text=The%20flags%20register%2C%20also%20called%20processor%20status%20or,one%20or%20more%20bits%20and%20leave%20others%20unchanged.">status register</a>
+ SR is loaded to 0x06. This sets the Interrupt Disable flag (IF) as the default after reset. To finish up, /ACK_EXC is activated to deactivate /ACT_EXC so that EXC is cleared with /LD_IR.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/nmi.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/mc_nmi.png"/>
+</div>
+<br>
+The NMI can be triggered by the falling edge of the signal /NMI as shown here with a very short pulse at the red marker. Even though the /INT line was pulled low before /NMI, the next /LD_IR activation goes into the exception handling for the NMI (yellow marker). The IR code is 0x01, meaning /RES_BIT=H and /NMI_BIT=L and /INT_BIT=L, so the micro code for 0x01 and 0x05 (/INT_BIT=H) will have to be identical. Again, ignore the wrong interpretation of the disassembler mnemonic here.<br>
+Together with /LD_IR the signal INHIBIT_PC++ is activated here and as a result the PC is not incremented to keep it as is. In contrast to reset, interrupts have to store the return address and the status register on the stack first, which can be seen after the first 3 blue markers where the stack pointer is on the address bus and the values 0xFE, 0x8D and 0x41 are written. Then a 0xFF is written to SR to disable the interrupt.<br>
+Similar to reset the vector addresses are generated and the address loaded from there. In this case the vector address is 0xFFFA, 0xFFFB and the NMI address to call is 0xFE00 in this case. The EXC signal is cleared again and the execution continues at the NMI service routine.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/int.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_9/mc_int.png"/>
+</div>
+<br>
+The interrupt here is just following the NMI service routine above. The yellow marker shows the RTI instruction before the red marker, where the still pending interrupt is now handled. Again, the return PC address is not incremented, but put onto the stack again together with the status register. It all looks very similar to the NMI handling and the micro code is also almost the same. The difference is in the vector address generated by different ALU codes. Other than that is all identical.
+<br>
+<br>
+<h4 style="text-align: center;">Page 10: ALU</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_10/alu.png"/>
+</div>
+<br>
+The heart of the ALU are the two 4-bit ALU chips <a href="https://en.wikipedia.org/wiki/74181">74181</a>, which were once widely used in computers of that time. The 74LS181 is still available. There is an <a href="https://www.righto.com/2017/03/inside-vintage-74181-alu-chip-how-it.html">Interactive 74181 viewer</a> where all input bits can be changed via mouse click to see the results. <br>
+The schematics shows the two chips cascaded to 8-bits, the two input registers ALU_A and ALU_B as well as the output buffer connecting back to iDB.<br>
+These ALU chips contain more functions than needed here. But they are also missing few things. First, not a signle shift right function is integrated in the chips, so it had to be implemented externally. It is done simply by adding a secodn ALU_A register with shifted input assignments, so it can be fed into the ALU alternatively. It has to be complemented with an additional FF to include loading D0 into SH_CY and the multiplexer of the ALU_FCY signal to COMB_CY.<br>
+Second, the overflow flag is not generated by these ALY chips and is ralized via the three XOR-gates to create ALU_OV.<br>
+Third, the "A=B" output is not exactly usable as zero flag, so the NAND/AND-gate combination had to be added to create ALU_Z.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_10/ror.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_10/mc_ror.png"/>
+</div>
+<br>
+This example demonstrates the use of the ALU in different ways. The instructions "ROR $1234$,X" and "ROR $12F4,X" are executed with X=0x66. The first one does not require an address correction, but the second one does.<br>  
+First, the data address has to be calculated by adding the low part of the absolute address and X together. It is loaded to AL and then the address high part is read and both are loaded into AR. In the second ROR-execution the ALU_FCY causes FCY_COND to be set and the high address is loaded to ALU_A to be incremented in the ALU and then loaded to AR as corrected address.<br>
+After reading the data from the memory address (0x65 in the first case and 0x1C in the second) the right shift occurs with /OE_ALU_SH activation. The result is directly written back to the memory address.
+
+
 
 <br><br><br><br><br><br><br><br><br><br>
 <br>
