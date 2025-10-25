@@ -16,7 +16,7 @@ There is a great chip simulator <a href="http://www.visual6502.org/JSSim/expert.
 <br>
 Before I even got started designing my own CPU, I spent quite some time on creating a simulation tool <a href="https://github.com/StefansAI/SimTTL">SimTTL</a> to analyze both designs above and then working on this design.  In addition, I had to create the <a href="https://github.com/StefansAI/MicroCodeGenerator">MicroCodeGenerator</a> for this design and the small boards <a href="https://github.com/StefansAI/HexDisplayController">HexDisplayController</a>, <a href="https://github.com/StefansAI/LCD-DisplayController">LCD-DisplayController</a> and <a href="https://github.com/StefansAI/ArduinoExpander">ArduinoExpander</a> (for testing bread board circuits). All of this came together in this project.<br>
 If you want to know more about the 6502 processor, there is a lot out there. I personally liked <a href="http://www.6502.org/">6502.org</a> and <a href="https://www.masswerk.at/6502/">masswerk</a> and many more.<br>
-
+One more info: I used this <a href="https://www.amazon.com/dp/B0BFWKS53B">programmer</a> for GALs and Flashs.<br>
 <h3 style="text-align: center;">Description</h3>
 <h4 style="text-align: center;">Overview</h4>
 <br>
@@ -204,7 +204,8 @@ The 16-bit outputs are then grouped into the following:<br>
 - Load internal register<br>
 - ALU-code<br>
 Originally there were just 2 identical registers to capture the ROM outputs. But when I ran out out bits, I decided to replace one register with a GAL. This GAL not only acts as a register, it also expands the 4-bit ALU codes plus CF from the ROM into 5-bit ALU function bits plus CIN. This is possible since the ALU chips have more functions than actually needed for the 6510 computer.<br>
-The GAL projects are made with <a href="https://www.microchip.com/en-us/development-tool/WinCUPL">WinCupl</a> and the source codes are part of the project in <a href="https://github.com/StefansAI/TTL-6510-Computer/tree/main/WinCupl/ALUDECODER">GitHub.</a>
+The GAL projects are made with <a href="https://www.microchip.com/en-us/development-tool/WinCUPL">WinCupl</a> and the source codes are part of the project in <a href="https://github.com/StefansAI/TTL-6510-Computer/tree/main/WinCupl/ALUDECODER">GitHub.</a><br>
+I used this <a href="https://www.amazon.com/dp/B0BFWKS53B">programmer</a> to program the GALs as well as the Flash chips.
 <br>
 <br>
 <div style="text-align: center;">
@@ -356,8 +357,40 @@ Third, the "A=B" output is not exactly usable as zero flag, so the NAND/AND-gate
 This example demonstrates the use of the ALU in different ways. The instructions "ROR $1234$,X" and "ROR $12F4,X" are executed with X=0x66. The first one does not require an address correction, but the second one does.<br>  
 First, the data address has to be calculated by adding the low part of the absolute address and X together. It is loaded to AL and then the address high part is read and both are loaded into AR. In the second ROR-execution the ALU_FCY causes FCY_COND to be set and the high address is loaded to ALU_A to be incremented in the ALU and then loaded to AR as corrected address.<br>
 After reading the data from the memory address (0x65 in the first case and 0x1C in the second) the right shift occurs with /OE_ALU_SH activation. The result is directly written back to the memory address.
-
-
+<br>
+<br>
+<h4 style="text-align: center;">Page 11: Status Register</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_11/status_register.png"/>
+</div>
+<br>
+<a href="https://www.nesdev.org/wiki/Status_flags">Here</a> is a nice description of the 6502 status register. The flags can be set or reset through a number of instructions or loaded from the data bus or read from the data bus for stack operations for instance. But part of the flags can be changed from ALU operations in different ways, which is defined for each instruction. All that has to be reflected in the design.<br>
+Reading the flags is easily implemented by adding a tri-state buffer with it's inputs connected to the flags in the correct order.<br>
+Decoding the flag set and clear instructions turned out to be easy as well by decoding bits from the instruction register IR and connecting the outputs to the set and reset inputs of the D-FFs.<br>
+Instructions that capture ALU conditions can be grouped into those which flags are influenced. Load instructions normally change NF and ZF. Shift instructions change NF, ZF and CF. And arithmetic instructions change NF, ZF, CF and VF. The instruction decoder provides signals for all of these and they need to be translated into clock signals for the D-FFs.<br>
+The sources for the D-inputs of the FFs can come from ALU states, the data bus and some special sources. That's why there two multiplexers to chose the correct one. <br>
+A special condition is created by the BIT instruction, where the ALU output bits 6 and 7 are copied into VF and ZF. The inputs of the multiplexers are connected in a way that all of the requirements above are met.<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_11/simttl_flags.png"/>
+</div>
+<br>
+The SimTTL screenshot shows the execution of different flag influencing instructions. The first one (PLP) is loading SR from the stack (0x14) with the rising edge of /LD_SR. It is followed by the two instructions SEC (set Carry flag) and CLI (clear interrupt flag), which use /CH_SR to set or reset the flags. The BIT instruction reads 0x55 from the zero page and sets VF from bit 6 
+and NF from bit 7. The last instruction here is ROR A, which results in activating /OE_ALU_SH. Register A had been cleared before and CF is shifted into bit 7 setting NF. Bit 0 was shifted out into CF, which is now cleared.
+<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_11/mc_sec.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_11/mc_bit.png"/>
+</div>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_11/mc_ror.png"/>
+</div>
+<br>
+Here are the micro codes as referenes for the execution graphs above.
 
 <br><br><br><br><br><br><br><br><br><br>
 <br>
