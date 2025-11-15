@@ -463,7 +463,7 @@ Here is the access table from the 6510:
     <td>Data Output Register</td>
   </tr>
 </table>
-The address bits A1 to A15 have to be low, which is detected via the tripple input NOR gates (74HCT27) and the 8-input NAND (74HCT30), while AB0 and R/W are connected to the 74HCT139 decoder, which provides the 4 signals for the registers and buffers.<br>
+The address bits A1 to A15 have to be low, which is detected via the triple input NOR gates (74HCT27) and the 8-input NAND (74HCT30), while AB0 and R/W are connected to the 74HCT139 decoder, which provides the 4 signals for the registers and buffers.<br>
 The outputs of the direction register are connected to individual bus buffer gates (74HCT125) so, that each bit can be activated or tristated independently of the logical state of the data output register. The read input buffers (74HCT541) are connected directly to the direction bits and the port bits.<br>
 In the 6510, the processor port bits are inactive/tristate until programmed. That's why there are pull-up resistors in the C64 to make sure, the kernal is addressed with port bits 0..2 all high. Here, both 8-bit channels contain pull-up resistor networks. One takes care of the data outpts and the other makes sure none of the tri-state buffers are activated. In addition there is the D-Flip-Flop, which is cleared with /RESET, disabling the direction write register outputs, so the pull-ups can keep the 74HCT125 gates in tristate until the first write operation to the direction register.
 <br>
@@ -474,7 +474,7 @@ In the 6510, the processor port bits are inactive/tristate until programmed. Tha
   <img src="docs/assets/images/page_14/external_memory.png"/>
 </div>
 <br>
-The C64 had up to 64K Byte RAM and additional ROM areas that can be mapped. Today the memory selection is so much easier. So, here are 64K Byte static RAM and 128K Flash with only the lower 64K in use here. The connections of adress bus and data bus are straight forward. The chip select generation is a bit more complicated to imitate the C64 scheme (see <a href="https://www.c64os.com/post/6510procport">Processor Port</a>)
+The C64 had up to 64K Byte RAM and additional ROM areas that can be mapped. Today the memory selection is so much easier. So, here are 64K Byte static RAM and 128K Flash with only the lower 64K in use here. The connections of address bus and data bus are straight forward. The chip select generation is a bit more complicated to imitate the C64 scheme (see <a href="https://www.c64os.com/post/6510procport">Processor Port</a>)
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/page_14/procportmapping.png"/>
