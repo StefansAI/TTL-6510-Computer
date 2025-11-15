@@ -1,0 +1,257 @@
+Code	Mnemonic	Operand	Bytes	Cycles	NZCIDV	Addr-Mode	Description
+00	BRK		1	7	---1--	implied	Force Break
+01	ORA (ind,X)	byte	2	6	++----	(indirect,X)	OR Memory with Accumulator
+02							(P65C816)
+03							(P65C816)
+04							(P65C02)
+05	ORA zpg	byte	2	3	++----	zeropage	OR Memory with Accumulator
+06	ASL zpg	byte	2	5	+++---	zeropage	Arithmetic Shift Left
+07							(P65C816)
+08	PHP		1	3	------	implied	Push Processor Status on Stack
+09	ORA #	byte	2	2	++----	immediate	OR Accumulator with #Immediate value
+0A	ASL A		1	2	+++---	accumulator	Arithmetic Shift Left
+0B							(P65C816)
+0C							(P65C02)
+0D	ORA abs	word	3	4	++----	absolute	OR Memory with Accumulator
+0E	ASL abs	word	3	6	+++---	absolute	Arithmetic Shift Left
+0F							(P65C816)
+10	BPL rel	sbyte	2	2**	------	relative	Branch on Result Plus (N = 0)
+11	ORA (ind),Y	byte	2	5*	++----	(indirect),Y	OR Memory with Accumulator
+12							(P65C02)
+13							(P65C816)
+14							(P65C02)
+15	ORA zpg,X	byte	2	4	++----	zeropage,X	OR Memory with Accumulator
+16	ASL zpg,X	byte	2	6	+++---	zeropage,X	Arithmetic Shift Left
+17							(P65C816)
+18	CLC		1	2	--0---	implied	Clear Carry Flag
+19	ORA abs,Y	word	3	4*	++----	absolute,Y	OR Memory with Accumulator
+1A							(P65C02)
+1B							(P65C816)
+1C							(P65C02)
+1D	ORA abs,X	word	3	4*	++----	absolute,X	OR Memory with Accumulator
+1E	ASL abs,X	word	3	7	+++---	absolute,X	Arithmetic Shift Left
+1F							(P65C816)
+20	JSR abs	word	3	6	------	absolute	Jump to New Location Saving Return Address
+21	AND (ind,X)	byte	2	6	++----	(indirect,X)	AND Memory with Accumulator
+22							(P65C816)
+23							(P65C816)
+24	BIT zpg	byte	2	3	7+---6	zeropage	Test Bits in Memory with Accumulator
+25	AND zpg	byte	2	3	++----	zeropage	AND Memory with Accumulator
+26	ROL zpg	byte	2	5	+++---	zeropage	Rotate One Bit Left (Memory or Accumulator)
+27							(P65C816)
+28	PLP		1	4	++++++	implied	Pull Processor Status from Stack
+29	AND #	byte	2	2	++----	immediate	AND Memory with Accumulator
+2A	ROL A		1	2	+++---	accumulator	Rotate One Bit Left
+2B							(P65C816)
+2C	BIT abs	word	3	4	7+---6	absolute	Test Bits in Memory with Accumulator
+2D	AND abs	word	3	4	++----	absolute	AND Memory with Accumulator
+2E	ROL abs	word	3	6	+++---	absolute	Rotate One Bit Left (Memory or Accumulator)
+2F							(P65C816)
+30	BMI rel	sbyte	2	2**	------	relative	Branch on Result Minus (branch on N = 1)
+31	AND (ind),Y	byte	2	5*	++----	(indirect),Y	AND Memory with Accumulator
+32							(P65C02)
+33							(P65C816)
+34							(P65C02)
+35	AND zpg,X	byte	2	4	++----	zeropage,X	AND Memory with Accumulator
+36	ROL zpg,X	byte	2	6	+++---	zeropage,X	Rotate One Bit Left (Memory or Accumulator)
+37							(P65C816)
+38	SEC		1	2	--1---	implied	Set Carry Flag
+39	AND abs,Y	word	3	4*	++----	absolute,Y	AND Memory with Accumulator
+3A							(P65C02)
+3B							(P65C816)
+3C							(P65C02)
+3D	AND abs,X	word	3	4*	++----	absolute,X	AND Memory with Accumulator
+3E	ROL abs,X	word	3	7	+++---	absolute,X	Rotate One Bit Left (Memory or Accumulator)
+3F							(P65C816)
+40	RTI		1	6	++++++	implied	Return from Interrupt
+41	EOR (ind,X)	byte	2	6	++----	(indirect,X)	Exclusive-OR Memory with Accumulator
+42							(P65C816)
+43							(P65C816)
+44							(P65C816)
+45	EOR zpg	byte	2	3	++----	zeropage	Exclusive-OR Memory with Accumulator
+46	LSR zpg	byte	2	5	0++---	zeropage	Shift One Bit Right (Memory or Accumulator)
+47							(P65C816)
+48	PHA		1	3	------	implied	Push Accumulator on Stack
+49	EOR #	byte	2	2	++----	immediate	Exclusive-OR Memory with Accumulator
+4A	LSR A		1	2	0++---	accumulator	Shift One Bit Right (Memory or Accumulator)
+4B							(P65C816)
+4C	JMP abs	word	3	3	------	absolute	Jump to New Location
+4D	EOR abs	word	3	4	++----	absolute	Exclusive-OR Memory with Accumulator
+4E	LSR abs	word	3	6	0++---	absolute	Shift One Bit Right (Memory or Accumulator)
+4F							(P65C816)
+50	BVC rel	sbyte	2	2**	------	relative	Branch on Overflow Clear (branch on V = 0)
+51	EOR (ind),Y	byte	2	5*	++----	(indirect),Y	Exclusive-OR Memory with Accumulator
+52							(P65C02)
+53							(P65C816)
+54							(P65C816)
+55	EOR zpg,X	byte	2	4	++----	zeropage,X	Exclusive-OR Memory with Accumulator
+56	LSR zpg,X	byte	2	6	0++---	zeropage,X	Shift One Bit Right (Memory or Accumulator)
+57							(P65C816)
+58	CLI		1	2	---0--	implied	Clear Interrupt Disable Bit(0 -> I)
+59	EOR abs,Y	word	3	4*	++----	absolute,Y	Exclusive-OR Memory with Accumulator
+5A							(P65C02)
+5B							(P65C816)
+5C							(P65C816)
+5D	EOR abs,X	word	3	4*	++----	absolute,X	Exclusive-OR Memory with Accumulator
+5E	LSR abs,X	word	3	7	0++---	absolute,X	Shift One Bit Right (Memory or Accumulator)
+5F							(P65C816)
+60	RTS		1	6	------	implied	Return from Subroutine
+61	ADC (ind,X)	byte	2	6	+++--+	(indirect,X)	Add Memory to Accumulator with Carry
+62							(P65C816)
+63							(P65C816)
+64							(P65C02)
+65	ADC zpg	byte	2	3	+++--+	zeropage	Add Memory to Accumulator with Carry
+66	ROR zpg	byte	2	5	+++---	zeropage	Rotate One Bit Right (Memory or Accumulator)
+67							(P65C816)
+68	PLA		1	4	++----	implied	Pull Accumulator from Stack
+69	ADC #	byte	2	2	+++--+	immediate	Add Memory to Accumulator with Carry
+6A	ROR A		1	2	+++---	accumulator	Rotate One Bit Right (Memory or Accumulator)
+6B							(P65C816)
+6C	JMP (ind)	byte	3	5	------	indirect	Jump to New Location
+6D	ADC abs	word	3	4	+++--+	absolute	Add Memory to Accumulator with Carry
+6E	ROR abs	word	3	6	+++---	absolute	Rotate One Bit Right (Memory or Accumulator)
+6F							(P65C816)
+70	BVS rel	sbyte	2	2**	------	relative	Branch on Overflow Set (branch on V = 1)
+71	ADC (ind),Y	byte	2	5*	+++--+	(indirect),Y	Add Memory to Accumulator with Carry
+72							(P65C02)
+73							(P65C816)
+74							(P65C816)
+75	ADC zpg,X	byte	2	4	+++--+	zeropage,X	Add Memory to Accumulator with Carry
+76	ROR zpg,X	byte	2	6	+++---	zeropage,X	Rotate One Bit Right (Memory or Accumulator)
+77							(P65C816)
+78	SEI		1	2	---1--	implied	Set Interrupt Disable Status(1 -> I)
+79	ADC abs,Y	word	3	4*	+++--+	absolute,Y	Add Memory to Accumulator with Carry
+7A							(P65C02)
+7B							(P65C816)
+7C							(P65C02)
+7D	ADC abs,X	word	3	4*	+++--+	absolute,X	Add Memory to Accumulator with Carry
+7E	ROR abs,X	word	3	7	+++---	absolute,X	Rotate One Bit Right (Memory or Accumulator)
+7F							(P65C816)
+80							(P65C02)
+81	STA (ind,X)	byte	2	6	------	(indirect,X)	Store Accumulator in Memory
+82							(P65C816)
+83							(P65C816)
+84	STY zpg	byte	2	3	------	zeropage	Store Index Y in Memory
+85	STA zpg	byte	2	3	------	zeropage	Store Accumulator in Memory
+86	STX zpg	byte	2	3	------	zeropage	Store Index X in Memory
+87							(P65C816)
+88	DEY		1	2	++----	implied	Decrement Index Y by One
+89							(P65C02)
+8A	TXA		1	2	++----	implied	Transfer Index X to Accumulator
+8B							(P65C816)
+8C	STY abs	word	3	6	------	absolute	Store Index Y in Memory
+8D	STA abs	word	3	4	------	absolute	Store Accumulator in Memory
+8E	STX abs	word	3	4	------	absolute	Store Index X in Memory
+8F							(P65C816)
+90	BCC rel	sbyte	2	2**	------	relative	Branch on Carry Clear(branch on C = 0)
+91	STA (ind),Y	byte	2	6	------	(indirect),Y	Store Accumulator in Memory
+92							(P65C02)
+93							(P65C816)
+94	STY zpg,X	byte	2	4	------	zeropage,X	Store Index Y in Memory
+95	STA zpg,X	byte	2	4	------	zeropage,X	Store Accumulator in Memory
+96	STX zpg,Y	byte	2	4	------	zeropage,Y	Store Index X in Memory
+97							(P65C816)
+98	TYA		1	2	++----	implied	Transfer Index Y to Accumulator
+99	STA abs,Y	word	3	5	------	absolute,Y	Store Accumulator in Memory
+9A	TXS		1	2	------	implied	Transfer Index X to Stack Register(X -> SP)
+9B							(P65C816)
+9C							(P65C02)
+9D	STA abs,X	word	3	5	------	absolute,X	Store Accumulator in Memory
+9E							(P65C02)
+9F							(P65C816)
+A0	LDY #	byte	2	2	++----	immediate	Load Index Y with Memory
+A1	LDA (ind,X)	byte	2	6	++----	(indirect,X)	Load Accumulator with Memory
+A2	LDX #	byte	2	2	++----	immediate	Load Index X with Memory
+A3							(P65C816)
+A4	LDY zpg	byte	2	3	++----	zeropage	Load Index Y with Memory
+A5	LDA zpg	byte	2	3	++----	zeropage	Load Accumulator with Memory
+A6	LDX zpg	byte	2	3	++----	zeropage	Load Index X with Memory
+A7							(P65C816)
+A8	TAY		1	2	++----	implied	Transfer Accumulator to Index Y
+A9	LDA #	byte	2	2	++----	immediate	Load Accumulator with Memory
+AA	TAX		1	2	++----	implied	Transfer Accumulator to Index X
+AB							(P65C816)
+AC	LDY abs	word	3	4	++----	absolute	Load Index Y with Memory
+AD	LDA abs	word	3	4	++----	absolute	Load Accumulator with Memory
+AE	LDX abs	word	3	4	++----	absolute	Load Index X with Memory
+AF							(P65C816)
+B0	BCS rel	sbyte	2	2**	------	relative	Branch on Carry Set(branch on C = 1)
+B1	LDA (ind),Y	byte	2	5*	++----	(indirect),Y	Load Accumulator with Memory
+B2							(P65C02)
+B3							(P65C816)
+B4	LDY zpg,X	byte	2	4	++----	zeropage,X	Load Index Y with Memory
+B5	LDA zpg,X	byte	2	4	++----	zeropage,X	Load Accumulator with Memory
+B6	LDX zpg,Y	byte	2	4	++----	zeropage,Y	Load Index X with Memory
+B7							(P65C816)
+B8	CLV		1	2	-----0	implied	Clear Overflow Flag(0 -> V)
+B9	LDA abs,Y	word	3	4*	++----	absolute,Y	Load Accumulator with Memory
+BA	TSX		1	2	++----	implied	Transfer Stack Pointer to Index X
+BB							(P65C816)
+BC	LDY abs,X	word	3	4*	++----	absolute,X	Load Index Y with Memory
+BD	LDA abs,X	word	3	4*	++----	absolute,X	Load Accumulator with Memory
+BE	LDX abs,Y	word	3	4*	++----	absolute,Y	Load Index X with Memory
+BF							(P65C816)
+C0	CPY #	byte	2	2	+++---	immediate	Compare Memory and Index Y
+C1	CMP (ind,X)	byte	2	6	+++---	(indirect,X)	Compare Memory with Accumulator
+C2							(P65C816)
+C3							(P65C816)
+C4	CPY zpg	byte	2	3	+++---	zeropage	Compare Memory and Index Y
+C5	CMP zpg	byte	2	3	+++---	zeropage	Compare Memory with Accumulator
+C6	DEC zpg	byte	2	5	++----	zeropage	Decrement Memory by One
+C7							(P65C816)
+C8	INY		1	2	++----	implied	Increment Index Y by One
+C9	CMP #	byte	2	2	+++---	immediate	Compare Memory with Accumulator
+CA	DEX		1	2	++----	implied	Decrement Index X by One
+CB							(P65C816)
+CC	CPY abs	word	3	4	+++---	absolute	Compare Memory and Index Y
+CD	CMP abs	word	3	4	+++---	absolute	Compare Memory with Accumulator
+CE	DEC abs	word	3	6	++----	absolute	Decrement Memory by One
+CF							(P65C816)
+D0	BNE rel	sbyte	2	2**	------	relative	Branch on Result not Zero(branch on Z = 0)
+D1	CMP (ind),Y	byte	2	5*	+++---	(indirect),Y	Compare Memory with Accumulator
+D2							(P65C02)
+D3							(P65C816)
+D4							(P65C816)
+D5	CMP zpg,X	byte	2	4	+++---	zeropage,X	Compare Memory with Accumulator
+D6	DEC zpg,X	byte	2	6	++----	zeropage,X	Decrement Memory by One
+D7							(P65C816)
+D8	CLD		1	2	----0-	implied	Clear Decimal Mode(0 -> D)
+D9	CMP abs,Y	word	3	4*	+++---	absolute,Y	Compare Memory with Accumulator
+DA							(P65C02)
+DB							(P65C816)
+DC							(P65C816)
+DD	CMP abs,X	word	3	4*	+++---	absolute,X	Compare Memory with Accumulator
+DE	DEC abs,X	word	3	7	++----	absolute,X	Decrement Memory by One
+DF							(P65C816)
+E0	CPX #	byte	2	2	+++---	immediate	Compare Memory and Index X
+E1	SBC (ind,X)	byte	2	6	+++--+	(indirect,X)	Subtract Memory from Accumulator with Borrow
+E2							(P65C816)
+E3							(P65C816)
+E4	CPX zpg	byte	2	3	+++---	zeropage	Compare Memory and Index X
+E5	SBC zpg	byte	2	3	+++--+	zeropage	Subtract Memory from Accumulator with Borrow
+E6	INC zpg	byte	2	5	++----	zeropage	Increment Memory by One
+E7							(P65C816)
+E8	INX		1	2	++----	implied	Increment Index X by One
+E9	SBC #	byte	2	2	+++--+	immediate	Subtract Memory from Accumulator with Borrow
+EA	NOP		1	2	------	implied	No Operation
+EB							(P65C816)
+EC	CPX abs	word	3	4	+++---	absolute	Compare Memory and Index X
+ED	SBC abs	word	3	4	+++--+	absolute	Subtract Memory from Accumulator with Borrow
+EE	INC abs	word	3	6	++----	absolute	Increment Memory by One
+EF							(P65C816)
+F0	BEQ rel	sbyte	2	2**	------	relative	Branch on Result Zero(branch on Z = 1)
+F1	SBC (ind),Y	byte	2	5*	+++--+	(indirect),Y	Subtract Memory from Accumulator with Borrow
+F2							(P65C02)
+F3							(P65C816)
+F4							(P65C816)
+F5	SBC zpg,X	byte	2	4	+++--+	zeropage,X	Subtract Memory from Accumulator with Borrow
+F6	INC zpg,X	byte	2	6	++----	zeropage,X	Increment Memory by One
+F7							(P65C816)
+F8	SED		1	2	----1-	implied	Set Decimal Flag(1 -> D)
+F9	SBC abs,Y	word	3	4*	+++--+	absolute,Y	Subtract Memory from Accumulator with Borrow
+FA							(P65C02)
+FB							(P65C816)
+FC							(P65C816)
+FD	SBC abs,X	word	3	4*	+++--+	absolute,X	Subtract Memory from Accumulator with Borrow
+FE	INC abs,X	word	3	7	++----	absolute,X	Increment Memory by One
+FF							(P65C816)

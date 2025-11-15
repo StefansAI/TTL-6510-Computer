@@ -1,0 +1,102 @@
+; ================================================
+; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+; SPDX-License-Identifier: BeerWare
+;
+; Testing all branch conditions
+;
+; paste here to create binary: 
+; https://masswerk.at/6502/assembler.html
+;=================================================
+
+* = $FE00
+NMI:
+	RTI
+
+L0:
+	RTS
+;=======================
+MAIN:
+	CLC
+	CLV
+	LDA	#0
+	BCS	MAIN
+	BMI MAIN
+	BNE MAIN
+	BVS	MAIN
+	JMP	CC1
+	
+MAIN2:
+	CLC
+	LDA	#$FF
+	ADC #$FF
+	BCC	MAIN
+	BPL MAIN
+	BEQ MAIN
+	BVC	MAIN
+	JMP CS1
+	
+;=======================
+* = $FEA0
+CC4 BCC	VC1
+VC4 BVC	EQ1
+EQ4 BEQ PL1
+PL4 BPL NEXT
+
+CS4 BCS	VS1
+VS4 BVS	NE1
+NE4 BNE MI1
+MI4 BMI END
+
+	
+;=======================	
+* = $FF00
+NEXT:
+	JMP MAIN2
+END:
+	BRK
+	JMP END
+	
+CC1 BCC	CC2
+CC3 BCC	CC4
+
+VC1 BVC	VC2
+VC3 BVC	VC4
+
+EQ1 BEQ EQ2
+EQ3 BEQ EQ4
+
+PL1 BPL PL2
+PL3 BPL PL4
+
+
+CS1 BCS	CS2
+CS3 BCS	CS4
+
+VS1 BVS	VS2
+VS3 BVS	VS4
+
+NE1 BNE NE2
+NE3 BNE NE4
+
+MI1 BMI MI2
+MI3 BMI MI4
+
+
+
+;=======================
+* = $FF60
+CC2 BCC	CC3
+VC2 BVC	VC3
+EQ2 BEQ EQ3
+PL2 BPL PL3
+
+CS2 BCS	CS3
+VS2 BVS	VS3
+NE2 BNE NE3
+MI2 BMI MI3
+
+
+* = $FFEF
+; Fill up to FFEF
+	BRK
+

@@ -1,0 +1,15 @@
+                            * = $E200
+E200   A9 07                LDA #$07
+E202   85 00                STA $00
+E204   85 01                STA $01
+E206   A9 35                LDA #$35
+E208   8D 01 DF             STA $DF01
+E20B   A9 00                LDA #$00
+E20D   85 02      LE20D     STA $02
+E20F   8D 00 DF             STA $DF00
+E212   AD 01 DF   LE212     LDA $DF01
+E215   29 02                AND #$02
+E217   F0 F9                BEQ LE212
+E219   A5 02                LDA $02
+E21B   4C 0D E2             JMP LE20D
+                            .END

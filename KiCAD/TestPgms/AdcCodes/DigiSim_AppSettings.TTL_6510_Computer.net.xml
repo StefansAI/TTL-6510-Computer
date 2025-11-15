@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <identifier>DigiSim_AppSettings</identifier>
+  <selected_schematics>TTL_6510_Computer.net</selected_schematics>
+  <netlist_filename>C:\Users\stefa\OneDrive\Documents\KiCad\9.0\projects\TTL 6510 Computer\TTL 6510 Computer.net</netlist_filename>
+  <schematics>
+    <TTL_6510_Computer.net>
+      <simulation_time_interval>1</simulation_time_interval>
+      <simulation_max_time>750000</simulation_max_time>
+      <signals_zoom_x>0.0329386666666667</signals_zoom_x>
+      <signals_graph_loc_x>6196</signals_graph_loc_x>
+      <signals_graph_loc_y>0</signals_graph_loc_y>
+      <display_min_time>0</display_min_time>
+      <display_max_time>750000</display_max_time>
+      <expand_all>False</expand_all>
+      <include_inputs>False</include_inputs>
+      <display_pin_no>True</display_pin_no>
+      <auto_close_import_form>True</auto_close_import_form>
+      <cursor>
+        <time>742875.647668394</time>
+        <x>24479</x>
+        <selected>False</selected>
+      </cursor>
+      <markers />
+      <current_signals>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/RESET</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">CLK0</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/STP_RES</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">2CLK</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/2CLK</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">iPHI2</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/iPHI2</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/INT</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/NMI</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_IR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">MC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_MC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">FCY_COND</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">HCY_NEG</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">SPEC_COND</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">EXC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_IR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">IR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">Mnemonic</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">PC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">AR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">AB</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">DB</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">iDB</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">R/W</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">AL</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_SR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_X</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_Y</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">REG_SP</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_S</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_M</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_CIN</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_B</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">CF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">NF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ZF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">VF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">DF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">BF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">IF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/ALU_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/ALU_HCY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_M</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_OV</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_Z</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">SH_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">COMB_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">FULL_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_A_BCD</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_B</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZ</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZCV</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_SH</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_FDCY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_HDCY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_BRKL</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_iDB</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_iDB_LD_SP</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_PC_H</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_PC_L</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_PP_DIR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SIX_H</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SIX_L</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SP</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_X</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_Y</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/CP_SP</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OUT_DIR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/PC_OUT_EN</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/PC_OUT_EN++</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/SP_OUT_EN</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/AR_OUT_EN</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/AR_OUT_EN_WR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/AR_OUT_EN_WR++</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/AR_OUT_EN++</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_AL</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_ALU_A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_ALU_A_H</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_ALU_AB</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_ALU_B</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_AR_H</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_AR_ZP</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_IR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_PC_H</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_SP</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_SP*</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_SR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_X</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_Y</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/ACT_EXC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/RES_BIT</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/NMI_BIT</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/INT_BIT</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/LD_IR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">FULL_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">FULL_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">HALF_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">OFFS_NEG</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">HCY_NEG</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">HCY_NEG</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SIX_H</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SIX_H*</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SIX_L</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_SIX_L*</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/AEC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">2CLK</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">PHI2</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OUT_DIR</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">R/W</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">iPHI2</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">PHI2</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/PHI2</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">DB</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">U98.A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">U98.OEn</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">CLK_C</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">CLK_NZ</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">CLK_V</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">D_CF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">D_NF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">D_OV</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">D_ZF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZV</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_A_BCD</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_B</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_FDCY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_HDCY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZ</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZCV</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZV</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_SH</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/ALU_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_SH</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">OE_ALU_SH</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">COMB_CY</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">D_CF</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">CLK_C</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">/OE_ALU_NZC</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_A</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_B</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_M</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_S</item>
+        <item radix="Hexadecimal" invert="False" reverse="False" expanded="False">ALU_CIN</item>
+      </current_signals>
+      <current_stimuli>
+        <item bits="1" output="OpenDrain" value="1" value_str="1" time="500000" time_str="500000" duration="500" duration_str="500">/INT</item>
+        <item bits="1" output="OpenDrain" value="1" value_str="1" time="501000" time_str="501000" duration="100" duration_str="100">/NMI</item>
+      </current_stimuli>
+      <current_trigger>
+        <item bits="1" condition="EQ" value="0" value_str="0" logic="OR">/LD_IR</item>
+      </current_trigger>
+    </TTL_6510_Computer.net>
+  </schematics>
+</settings>

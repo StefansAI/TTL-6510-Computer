@@ -1,0 +1,240 @@
+; ================================================
+; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+; SPDX-License-Identifier: BeerWare
+;
+; Testing all codes once
+;
+; paste here to create binary: 
+; https://masswerk.at/6502/assembler.html
+;=================================================
+
+* = $FE00
+NMI:
+	RTI
+
+L0:
+	RTS
+
+MAIN:
+	LDA #$A5
+	STA $2345
+	LDA #$FE
+	STA $2346
+	
+	LDA #$13
+	STA $11
+	LDA #$67
+	STA $10
+	LDX #$55
+	LDY #$33
+	LDA #$12
+
+ 
+; Testing Op Codes
+;0-
+	BRK
+	ORA ($10,X)
+	ORA $10
+	ASL $10
+	PHP
+	ORA #$35
+	ASL A
+	ORA $1234
+	ASL $5678
+
+	LDA #$12
+
+;1-
+	BPL L1
+	LDA #$23
+L1: 
+	ORA ($10),Y
+	ORA $10,X
+	ASL $10,X
+	CLC
+	ORA $1234,Y
+	ORA $1234,X
+	ASL $1234,X
+
+;2-
+	JSR L0
+	AND ($10,X)
+	BIT $10
+	AND $10
+	ROL $10
+	PLP
+	AND #$77
+	ROL A
+	BIT $1234
+	AND $1234
+	ROL $1234
+
+;3-
+	BMI L2
+	LDX #$55
+L2:
+	AND ($10),Y
+	AND $10,X
+	ROL $10,X
+	SEC
+	AND $1234,Y
+	AND $1234,X
+	ROL $1234,X
+
+;4-
+	EOR ($10,X)
+	EOR $10
+	LSR $10
+	PHA
+	EOR #$77
+	LSR A
+	JMP L3
+	LDY #$CC
+L3:
+	EOR $1234
+	LSR $1234
+
+;5-
+	BVC L4
+	LDA #$12
+L4:
+	EOR ($10),Y
+	EOR $10,X
+	LSR $10,X
+	CLI
+	EOR $1234,Y
+	EOR $1234,X
+	LSR $1234,X
+
+;6-
+; 	RTS
+	ADC ($10,X)
+	ADC $10
+	ROR $10
+	PLA
+	ADC #$AA
+	ROR A
+	JMP ($2345)
+	LDA #$33
+JADR:
+	ADC $1234
+	ROR $1234
+
+;7-
+	BVS L5
+	LDA #$CC
+L5:
+	ADC ($10),Y
+	ADC $10,X
+	ROR $10,X
+	SEI
+	ADC $1234,Y
+	ADC $1234,X
+	ROR $1234,X
+
+;8-
+	STA ($10,X)
+	STY $10
+	STA $10
+	STX $10
+	DEY
+	TXA
+	STY $1234
+	STA $1234
+	STX $1234
+
+;9-
+	BCC L6
+	LDA #$DD
+L6:
+	STA ($10),Y
+	STY $10,X
+	STX $10,Y
+	TYA
+	STA $1234,Y
+	TXS
+	STA $1234,X
+
+;A-
+	LDY #$AF
+	LDA ($10,X)
+	LDX #$33
+	LDY $10
+	LDA $10
+	LDX $10
+	TAY
+	LDA #$A5
+	TAX
+	LDY $1234
+	LDA $1234
+	LDX $1234
+
+;B-
+	BCS L7
+	LDX #$88
+L7:
+	LDA ($10),Y
+	LDY $10,X
+	LDA $10,X
+	LDX $10,Y
+	CLV
+	LDA $1234,Y
+	TSX
+	LDY $1234,X
+	LDA $1234,X
+	LDX $1234,Y
+
+;C-
+	CPY #$12
+	CMP ($10,X)
+	CPY $10
+	CMP $10
+	DEC $10
+	INY
+	CMP #$10
+	DEX
+	CPY $1234
+	CMP $1234
+	DEC $1234
+
+;D-
+	BNE L8
+	LDA #$BB
+L8:
+	CMP ($10),Y
+	CMP $10,X
+	DEC $10,X
+	CLD
+	CMP $1234,Y
+	CMP $1234,X
+	DEC $1234,X
+
+;E-
+	CPX #$99
+	SBC ($10,X)
+	CPX $10
+	SBC $10
+	INC $10
+	INX
+	SBC #$BB
+	NOP
+	CPX $1234
+	SBC $1234
+	INC $1234
+
+;F-
+	BEQ L9
+	LDY #$EE
+L9:
+	SBC ($10),Y
+	SBC $10,X
+	INC $10,X
+	SED
+	SBC $1234,Y
+	SBC $1234,X
+	INC $1234,X
+
+* = $FFEF
+; Fill up to FFEF
+	BRK
+

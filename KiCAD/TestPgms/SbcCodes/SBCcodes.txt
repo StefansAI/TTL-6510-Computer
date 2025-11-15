@@ -1,0 +1,276 @@
+; ================================================
+; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+; SPDX-License-Identifier: BeerWare
+;
+; Testing all SBC codes in decimal mode 
+; including address calculation
+;
+; paste here to create binary: 
+; https://masswerk.at/6502/assembler.html
+;=================================================
+
+
+* = $FE00
+NMI:
+	RTI
+
+FUNC:
+	RTS
+
+MAIN:
+	LDX #$10
+	LDY #$20	
+	LDA #$34
+	STA $10,X
+	STA $10,Y
+	LDA #$12
+	STA $11,X
+	STA $11,Y
+	SED
+	
+; Testing Op Codes
+;==============
+	LDA #$22
+	STA ($10,X)
+	LDA #$55
+	SBC ($10,X)
+	
+	LDA #$09
+	STA ($10,X)
+	LDA #$55
+	SBC ($10,X)
+		
+	LDA #$90
+	STA ($10,X)
+	LDA #$55
+	SBC ($10,X)
+	
+	LDA #$99
+	STA ($10,X)
+	LDA #$55
+	SBC ($10,X)
+	
+;==============
+	LDA #$22
+	STA $22
+	LDA #$55
+	SBC $22
+	
+	LDA #$09
+	STA $09
+	LDA #$55
+	SBC $09
+	
+	LDA #$90
+	STA $90
+	LDA #$55
+	SBC $90
+	
+	LDA #$99
+	STA $99
+	LDA #$55
+	SBC $99
+	
+;==============	
+	LDA #$55
+	SBC #$11	
+	
+	LDA #$55
+	SBC #$09
+	
+	LDA #$55
+	SBC #$90
+	
+	LDA #$55
+	SBC #$99
+	
+;==============	
+	LDA #$22
+	STA $8022
+	LDA #$55
+	SBC $8022
+	
+	LDA #$09
+	STA $8009
+	LDA #$55
+	SBC $8009
+	
+	LDA #$90
+	STA $8090
+	LDA #$55
+	SBC $8090
+	
+	LDA #$99
+	STA $8099
+	LDA #$55
+	SBC $8099
+	
+;==============
+	LDA #$13
+	STA $11
+	LDA #$67
+	STA $10
+
+	LDA #$22
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+	LDA #$09
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+	LDA #$90
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+	LDA #$99
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+;==============
+	LDA #$13
+	STA $11
+	LDA #$FF
+	STA $10
+
+	LDA #$22
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+	LDA #$09
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+	LDA #$90
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+	LDA #$99
+	STA ($10),Y
+	LDA #$55
+	SBC ($10),Y
+	
+;==============	
+	
+	LDA #$22
+	STA $10,X
+	LDA #$55
+	SBC $10,X
+
+	LDA #$09
+	STA $10,X
+	LDA #$55
+	SBC $10,X
+
+	LDA #$90
+	STA $10,X
+	LDA #$55
+	SBC $10,X
+
+	LDA #$99
+	STA $10,X
+	LDA #$55
+	SBC $10,X
+
+;==============
+	LDY #$11
+	LDA #$22
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+	LDA #$09
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+	LDA #$90
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+	LDA #$99
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+;==============
+	LDY #$FF
+	LDA #$22
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+	LDA #$09
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+	LDA #$90
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+	LDA #$99
+	STA $1234,Y
+	LDA #$55
+	SBC $1234,Y
+
+
+;==============
+	LDX #$33
+	LDA #$22
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	LDA #$09
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	LDA #$90
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	LDA #$99
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	
+;==============
+	LDX #$FF
+	LDA #$22
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	LDA #$09
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	LDA #$90
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	LDA #$99
+	STA $1234,X
+	LDA #$55
+	SBC $1234,X
+
+	
+* = $FFEF
+; Fill up to FFEF
+	BRK
+

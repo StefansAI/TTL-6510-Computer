@@ -1,0 +1,141 @@
+; ================================================
+; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+; SPDX-License-Identifier: BeerWare
+;
+; Testing all address calculating codes 
+;
+; paste here to create binary: 
+; https://masswerk.at/6502/assembler.html
+;=================================================
+
+
+* = $FE00
+NMI:
+	RTI
+
+L0:
+	RTS
+
+MAIN:
+	LDA #$12
+	STA $11
+	STA $1235
+	LDA #$22
+	STA $10
+	STA $1234
+	
+	LDA #$12
+	STA $13
+	STA $1237
+	LDA #$FF
+	STA $12
+	STA $1236
+	
+	LDX #$66
+	LDY #$67
+	LDA #$12
+
+ 
+; Testing Op Codes
+	ADC $1234,X
+	ADC $12F4,X
+	
+	ROR $1234,X
+	ROR $12F4,X
+	
+	STA ($10),Y
+	STA ($12),Y
+	
+	STA $1234,Y
+	STA $12F4,Y
+	
+	STA $1234,X
+	STA $12F4,X
+	
+	LDA ($10),Y
+	LDA ($12),Y
+	
+	LDA $1234,Y
+	LDA $12F4,Y
+	
+	LDY $1234,X
+	LDY $12F4,X
+	
+	LDA $1234,X
+	LDA $12F4,X
+	
+	LDX $1234,Y
+	LDX $12F4,Y
+	
+	CMP ($10),Y
+	CMP ($12),Y
+	
+	CMP $1234,Y
+	CMP $12F4,Y
+	
+	CMP $1234,X
+	CMP $12F4,X
+	
+	DEC $1234,X
+	DEC $12F4,X
+	
+	SBC ($10),Y
+	SBC ($12),Y
+	
+	SBC $1234,Y
+	SBC $12F4,Y
+	
+	SBC $1234,X
+	SBC $12F4,X
+	
+	INC $1234,X
+	INC $12F4,X
+
+	nop
+;==============================
+	ORA ($10),Y
+	ORA ($12),Y
+	
+	ORA $1234,Y
+	ORA $12F6,Y
+	
+	ORA $1234,X
+	ORA $12F6,X
+	
+	ASL $1234,X
+	ASL $12F6,X
+	
+	AND ($10),Y
+	AND ($12),Y
+	
+	AND $1234,Y
+	AND $12F6,Y
+	
+	AND $1234,X
+	AND $12F6,X
+	
+	ROL $1234,X
+	ROL $12F6,X
+	
+	EOR ($10),Y
+	EOR ($12),Y
+	
+	EOR $1234,Y
+	EOR $12F6,Y
+	
+	EOR $1234,X
+	EOR $12F6,X
+	
+	LSR $1234,X
+	LSR $12F4,X
+		
+	ADC ($10),Y
+	ADC ($12),Y
+	
+	ADC $1234,Y
+	ADC $12F4,Y
+
+* = $FFEF
+; Fill up to FFF0
+	BRK
+

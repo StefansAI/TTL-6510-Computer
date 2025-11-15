@@ -1,0 +1,460 @@
+pass 1
+
+LINE  LOC          LABEL         PICT
+
+   1               ; ================================================
+   2               ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+   3               ; SPDX-License-Identifier: BeerWare
+   4               ;
+   5               ; Testing all codes once
+   6               ;
+   7               ; paste here to create binary: 
+   8               ; https://masswerk.at/6502/assembler.html
+   9               ;=================================================
+
+  11  FE00                       * = $FE00
+  12  FE00         NMI           
+  13  FE00                       RTI
+  15  FE01         L0            
+  16  FE01                       RTS
+  18  FE02         MAIN          
+  19  FE02                       LDA #$25
+  20  FE04                       STA $2345
+  21  FE07                       LDA #$FF
+  22  FE09                       STA $2346
+  24  FE0C                       LDA #$13
+  25  FE0E                       STA $11
+  26  FE10                       LDA #$67
+  27  FE12                       STA $10
+  28  FE14                       LDX #$55
+  29  FE16                       LDY #$33
+  30  FE18                       LDA #$12
+  33                             ; Testing Op Codes
+  34                             ;0-
+  35  FE1A                       BRK
+  36  FE1B                       ORA ($10,X)
+  37  FE1D                       ORA $10
+  38  FE1F                       ASL $10
+  39  FE21                       PHP
+  40  FE22                       ORA #$35
+  41  FE24                       ASL A
+  42  FE25                       ORA $1234
+  43  FE28                       ASL $5678
+  45  FE2B                       LDA #$12
+  47                             ;1-
+  48  FE2D                       BPL L1
+  49  FE2F                       LDA #$23
+  50  FE31         L1            
+  51  FE31                       ORA ($10),Y
+  52  FE33                       ORA $10,X
+  53  FE35                       ASL $10,X
+  54  FE37                       CLC
+  55  FE38                       ORA $1234,Y
+  56  FE3B                       ORA $1234,X
+  57  FE3E                       ASL $1234,X
+  59                             ;2-
+  60  FE41                       JSR L0
+  61  FE44                       AND ($10,X)
+  62  FE46                       BIT $10
+  63  FE48                       AND $10
+  64  FE4A                       ROL $10
+  65  FE4C                       PLP
+  66  FE4D                       AND #$77
+  67  FE4F                       ROL A
+  68  FE50                       BIT $1234
+  69  FE53                       AND $1234
+  70  FE56                       ROL $1234
+  72                             ;3-
+  73  FE59                       BMI L2
+  74  FE5B                       LDX #$55
+  75  FE5D         L2            
+  76  FE5D                       AND ($10),Y
+  77  FE5F                       AND $10,X
+  78  FE61                       ROL $10,X
+  79  FE63                       SEC
+  80  FE64                       AND $1234,Y
+  81  FE67                       AND $1234,X
+  82  FE6A                       ROL $1234,X
+  84                             ;4-
+  85  FE6D                       EOR ($10,X)
+  86  FE6F                       EOR $10
+  87  FE71                       LSR $10
+  88  FE73                       PHA
+  89  FE74                       EOR #$77
+  90  FE76                       LSR A
+  91  FE77                       JMP L3
+  92  FE7A                       LDY #$CC
+  93  FE7C         L3            
+  94  FE7C                       EOR $1234
+  95  FE7F                       LSR $1234
+  97                             ;5-
+  98  FE82                       BVC L4
+  99  FE84                       LDA #$12
+ 100  FE86         L4            
+ 101  FE86                       EOR ($10),Y
+ 102  FE88                       EOR $10,X
+ 103  FE8A                       LSR $10,X
+ 104  FE8C                       CLI
+ 105  FE8D                       EOR $1234,Y
+ 106  FE90                       EOR $1234,X
+ 107  FE93                       LSR $1234,X
+ 109                             ;6-
+ 110                             ; 	RTS
+ 111  FE96                       ADC ($10,X)
+ 112  FE98                       ADC $10
+ 113  FE9A                       ROR $10
+ 114  FE9C                       PLA
+ 115  FE9D                       ADC #$AA
+ 116  FE9F                       ROR A
+ 117  FEA0                       JMP ($2345)
+ 118  FEA3                       LDA #$33
+ 119  FEA5         JADR          
+ 120  FEA5                       ADC $1234
+ 121  FEA8                       ROR $1234
+ 123                             ;7-
+ 124  FEAB                       BVS L5
+ 125  FEAD                       LDA #$CC
+ 126  FEAF         L5            
+ 127  FEAF                       ADC ($10),Y
+ 128  FEB1                       ADC $10,X
+ 129  FEB3                       ROR $10,X
+ 130  FEB5                       SEI
+ 131  FEB6                       ADC $1234,Y
+ 132  FEB9                       ADC $1234,X
+ 133  FEBC                       ROR $1234,X
+ 135                             ;8-
+ 136  FEBF                       STA ($10,X)
+ 137  FEC1                       STY $10
+ 138  FEC3                       STA $10
+ 139  FEC5                       STX $10
+ 140  FEC7                       DEY
+ 141  FEC8                       TXA
+ 142  FEC9                       STY $1234
+ 143  FECC                       STA $1234
+ 144  FECF                       STX $1234
+ 146                             ;9-
+ 147  FED2                       BCC L6
+ 148  FED4                       LDA #$DD
+ 149  FED6         L6            
+ 150  FED6                       STA ($10),Y
+ 151  FED8                       STY $10,X
+ 152  FEDA                       STX $10,Y
+ 153  FEDC                       TYA
+ 154  FEDD                       STA $1234,Y
+ 155  FEE0                       TXS
+ 156  FEE1                       STA $1234,X
+ 158                             ;A-
+ 159  FEE4                       LDY #$AF
+ 160  FEE6                       LDA ($10,X)
+ 161  FEE8                       LDX #$33
+ 162  FEEA                       LDY $10
+ 163  FEEC                       LDA $10
+ 164  FEEE                       LDX $10
+ 165  FEF0                       TAY
+ 166  FEF1                       LDA #$A5
+ 167  FEF3                       TAX
+ 168  FEF4                       LDY $1234
+ 169  FEF7                       LDA $1234
+ 170  FEFA                       LDX $1234
+ 172                             ;B-
+ 173  FEFD                       BCS L7
+ 174  FEFF                       LDX #$88
+ 175  FF01         L7            
+ 176  FF01                       LDA ($10),Y
+ 177  FF03                       LDY $10,X
+ 178  FF05                       LDA $10,X
+ 179  FF07                       LDX $10,Y
+ 180  FF09                       CLV
+ 181  FF0A                       LDA $1234,Y
+ 182  FF0D                       TSX
+ 183  FF0E                       LDY $1234,X
+ 184  FF11                       LDA $1234,X
+ 185  FF14                       LDX $1234,Y
+ 187                             ;C-
+ 188  FF17                       CPY #$12
+ 189  FF19                       CMP ($10,X)
+ 190  FF1B                       CPY $10
+ 191  FF1D                       CMP $10
+ 192  FF1F                       DEC $10
+ 193  FF21                       INY
+ 194  FF22                       CMP #$10
+ 195  FF24                       DEX
+ 196  FF25                       CPY $1234
+ 197  FF28                       CMP $1234
+ 198  FF2B                       DEC $1234
+ 200                             ;D-
+ 201  FF2E                       BNE L8
+ 202  FF30                       LDA #$BB
+ 203  FF32         L8            
+ 204  FF32                       CMP ($10),Y
+ 205  FF34                       CMP $10,X
+ 206  FF36                       DEC $10,X
+ 207  FF38                       CLD
+ 208  FF39                       CMP $1234,Y
+ 209  FF3C                       CMP $1234,X
+ 210  FF3F                       DEC $1234,X
+ 212                             ;E-
+ 213  FF42                       CPX #$99
+ 214  FF44                       SBC ($10,X)
+ 215  FF46                       CPX $10
+ 216  FF48                       SBC $10
+ 217  FF4A                       INC $10
+ 218  FF4C                       INX
+ 219  FF4D                       SBC #$BB
+ 220  FF4F                       NOP
+ 221  FF50                       CPX $1234
+ 222  FF53                       SBC $1234
+ 223  FF56                       INC $1234
+ 225                             ;F-
+ 226  FF59                       BEQ L9
+ 227  FF5B                       LDY #$EE
+ 228  FF5D         L9            
+ 229  FF5D                       SBC ($10),Y
+ 230  FF5F                       SBC $10,X
+ 231  FF61                       INC $10,X
+ 232  FF63                       SED
+ 233  FF64                       SBC $1234,Y
+ 234  FF67                       SBC $1234,X
+ 235  FF6A                       INC $1234,X
+ 237  FFEF                       * = $FFEF
+ 238                             ; Fill up to FFEF
+ 239  FFEF                       BRK
+
+symbols
+ JADR              $FEA5
+ L0                $FE01
+ L1                $FE31
+ L2                $FE5D
+ L3                $FE7C
+ L4                $FE86
+ L5                $FEAF
+ L6                $FED6
+ L7                $FF01
+ L8                $FF32
+ L9                $FF5D
+ MAIN              $FE02
+ NMI               $FE00
+
+pass 2
+
+LOC   CODE         LABEL         INSTRUCTION
+
+                   ; ================================================
+                   ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+                   ; SPDX-License-Identifier: BeerWare
+                   ;
+                   ; Testing all codes once
+                   ;
+                   ; paste here to create binary: 
+                   ; https://masswerk.at/6502/assembler.html
+                   ;=================================================
+
+FE00                             * = $FE00
+FE00               NMI           
+FE00  40                         RTI
+FE01               L0            
+FE01  60                         RTS
+FE02               MAIN          
+FE02  A9 25                      LDA #$25
+FE04  8D 45 23                   STA $2345
+FE07  A9 FF                      LDA #$FF
+FE09  8D 46 23                   STA $2346
+FE0C  A9 13                      LDA #$13
+FE0E  85 11                      STA $11
+FE10  A9 67                      LDA #$67
+FE12  85 10                      STA $10
+FE14  A2 55                      LDX #$55
+FE16  A0 33                      LDY #$33
+FE18  A9 12                      LDA #$12
+                                 ; Testing Op Codes
+                                 ;0-
+FE1A  00                         BRK
+FE1B  01 10                      ORA ($10,X)
+FE1D  05 10                      ORA $10
+FE1F  06 10                      ASL $10
+FE21  08                         PHP
+FE22  09 35                      ORA #$35
+FE24  0A                         ASL A
+FE25  0D 34 12                   ORA $1234
+FE28  0E 78 56                   ASL $5678
+FE2B  A9 12                      LDA #$12
+                                 ;1-
+FE2D  10 02                      BPL $FE31
+FE2F  A9 23                      LDA #$23
+FE31               L1            
+FE31  11 10                      ORA ($10),Y
+FE33  15 10                      ORA $10,X
+FE35  16 10                      ASL $10,X
+FE37  18                         CLC
+FE38  19 34 12                   ORA $1234,Y
+FE3B  1D 34 12                   ORA $1234,X
+FE3E  1E 34 12                   ASL $1234,X
+                                 ;2-
+FE41  20 01 FE                   JSR $FE01
+FE44  21 10                      AND ($10,X)
+FE46  24 10                      BIT $10
+FE48  25 10                      AND $10
+FE4A  26 10                      ROL $10
+FE4C  28                         PLP
+FE4D  29 77                      AND #$77
+FE4F  2A                         ROL A
+FE50  2C 34 12                   BIT $1234
+FE53  2D 34 12                   AND $1234
+FE56  2E 34 12                   ROL $1234
+                                 ;3-
+FE59  30 02                      BMI $FE5D
+FE5B  A2 55                      LDX #$55
+FE5D               L2            
+FE5D  31 10                      AND ($10),Y
+FE5F  35 10                      AND $10,X
+FE61  36 10                      ROL $10,X
+FE63  38                         SEC
+FE64  39 34 12                   AND $1234,Y
+FE67  3D 34 12                   AND $1234,X
+FE6A  3E 34 12                   ROL $1234,X
+                                 ;4-
+FE6D  41 10                      EOR ($10,X)
+FE6F  45 10                      EOR $10
+FE71  46 10                      LSR $10
+FE73  48                         PHA
+FE74  49 77                      EOR #$77
+FE76  4A                         LSR A
+FE77  4C 7C FE                   JMP $FE7C
+FE7A  A0 CC                      LDY #$CC
+FE7C               L3            
+FE7C  4D 34 12                   EOR $1234
+FE7F  4E 34 12                   LSR $1234
+                                 ;5-
+FE82  50 02                      BVC $FE86
+FE84  A9 12                      LDA #$12
+FE86               L4            
+FE86  51 10                      EOR ($10),Y
+FE88  55 10                      EOR $10,X
+FE8A  56 10                      LSR $10,X
+FE8C  58                         CLI
+FE8D  59 34 12                   EOR $1234,Y
+FE90  5D 34 12                   EOR $1234,X
+FE93  5E 34 12                   LSR $1234,X
+                                 ;6-
+                                 ; 	RTS
+FE96  61 10                      ADC ($10,X)
+FE98  65 10                      ADC $10
+FE9A  66 10                      ROR $10
+FE9C  68                         PLA
+FE9D  69 AA                      ADC #$AA
+FE9F  6A                         ROR A
+FEA0  6C 45 23                   JMP ($2345)
+FEA3  A9 33                      LDA #$33
+FEA5               JADR          
+FEA5  6D 34 12                   ADC $1234
+FEA8  6E 34 12                   ROR $1234
+                                 ;7-
+FEAB  70 02                      BVS $FEAF
+FEAD  A9 CC                      LDA #$CC
+FEAF               L5            
+FEAF  71 10                      ADC ($10),Y
+FEB1  75 10                      ADC $10,X
+FEB3  76 10                      ROR $10,X
+FEB5  78                         SEI
+FEB6  79 34 12                   ADC $1234,Y
+FEB9  7D 34 12                   ADC $1234,X
+FEBC  7E 34 12                   ROR $1234,X
+                                 ;8-
+FEBF  81 10                      STA ($10,X)
+FEC1  84 10                      STY $10
+FEC3  85 10                      STA $10
+FEC5  86 10                      STX $10
+FEC7  88                         DEY
+FEC8  8A                         TXA
+FEC9  8C 34 12                   STY $1234
+FECC  8D 34 12                   STA $1234
+FECF  8E 34 12                   STX $1234
+                                 ;9-
+FED2  90 02                      BCC $FED6
+FED4  A9 DD                      LDA #$DD
+FED6               L6            
+FED6  91 10                      STA ($10),Y
+FED8  94 10                      STY $10,X
+FEDA  96 10                      STX $10,Y
+FEDC  98                         TYA
+FEDD  99 34 12                   STA $1234,Y
+FEE0  9A                         TXS
+FEE1  9D 34 12                   STA $1234,X
+                                 ;A-
+FEE4  A0 AF                      LDY #$AF
+FEE6  A1 10                      LDA ($10,X)
+FEE8  A2 33                      LDX #$33
+FEEA  A4 10                      LDY $10
+FEEC  A5 10                      LDA $10
+FEEE  A6 10                      LDX $10
+FEF0  A8                         TAY
+FEF1  A9 A5                      LDA #$A5
+FEF3  AA                         TAX
+FEF4  AC 34 12                   LDY $1234
+FEF7  AD 34 12                   LDA $1234
+FEFA  AE 34 12                   LDX $1234
+                                 ;B-
+FEFD  B0 02                      BCS $FF01
+FEFF  A2 88                      LDX #$88
+FF01               L7            
+FF01  B1 10                      LDA ($10),Y
+FF03  B4 10                      LDY $10,X
+FF05  B5 10                      LDA $10,X
+FF07  B6 10                      LDX $10,Y
+FF09  B8                         CLV
+FF0A  B9 34 12                   LDA $1234,Y
+FF0D  BA                         TSX
+FF0E  BC 34 12                   LDY $1234,X
+FF11  BD 34 12                   LDA $1234,X
+FF14  BE 34 12                   LDX $1234,Y
+                                 ;C-
+FF17  C0 12                      CPY #$12
+FF19  C1 10                      CMP ($10,X)
+FF1B  C4 10                      CPY $10
+FF1D  C5 10                      CMP $10
+FF1F  C6 10                      DEC $10
+FF21  C8                         INY
+FF22  C9 10                      CMP #$10
+FF24  CA                         DEX
+FF25  CC 34 12                   CPY $1234
+FF28  CD 34 12                   CMP $1234
+FF2B  CE 34 12                   DEC $1234
+                                 ;D-
+FF2E  D0 02                      BNE $FF32
+FF30  A9 BB                      LDA #$BB
+FF32               L8            
+FF32  D1 10                      CMP ($10),Y
+FF34  D5 10                      CMP $10,X
+FF36  D6 10                      DEC $10,X
+FF38  D8                         CLD
+FF39  D9 34 12                   CMP $1234,Y
+FF3C  DD 34 12                   CMP $1234,X
+FF3F  DE 34 12                   DEC $1234,X
+                                 ;E-
+FF42  E0 99                      CPX #$99
+FF44  E1 10                      SBC ($10,X)
+FF46  E4 10                      CPX $10
+FF48  E5 10                      SBC $10
+FF4A  E6 10                      INC $10
+FF4C  E8                         INX
+FF4D  E9 BB                      SBC #$BB
+FF4F  EA                         NOP
+FF50  EC 34 12                   CPX $1234
+FF53  ED 34 12                   SBC $1234
+FF56  EE 34 12                   INC $1234
+                                 ;F-
+FF59  F0 02                      BEQ $FF5D
+FF5B  A0 EE                      LDY #$EE
+FF5D               L9            
+FF5D  F1 10                      SBC ($10),Y
+FF5F  F5 10                      SBC $10,X
+FF61  F6 10                      INC $10,X
+FF63  F8                         SED
+FF64  F9 34 12                   SBC $1234,Y
+FF67  FD 34 12                   SBC $1234,X
+FF6A  FE 34 12                   INC $1234,X
+FFEF                             * = $FFEF
+                                 ; Fill up to FFEF
+FFEF  00                         BRK
+
+done (code: FE00..FFEF).

@@ -390,12 +390,137 @@ and NF from bit 7. The last instruction here is ROR A, which results in activati
   <img src="docs/assets/images/page_11/mc_ror.png"/>
 </div>
 <br>
-Here are the micro codes as referenes for the execution graphs above.
-
-<br><br><br><br><br><br><br><br><br><br>
+Here are the micro codes as references for the execution graphs above.
+<br>
+<br>
+<h4 style="text-align: center;">Page 12: Special Conditions</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_12/special_conditions.png"/>
+</div>
+<br>
+This page contains circuitries to generate signals for conditional branches and BCD arithmetic conditions. The multiplexer on the right side selects one of the flag outputs to create a signal related to the branch condition. The multiplexer is enabled by activating the signal /SET_BR_COND, which activates /BRC_EN until deactivated by the next /LD_IR. The signal SPEC_COND isconnected to the micro code ROMs as an address bit, so it can switch the execution between not executing the branch and executing the branch.<br>
+The left side of this page is dedicated to BCD corrections of ADC and SBC. As mentioned before, BCD corrections require additional adders/subtractors in hardware to execute the correction in the same number of cycles as the 6502. In this design, the corrections are implemented as more clock cycles (micro steps). But the logic to identify correction conditions still had to be implemented in hardware. <a href="https://www.geeksforgeeks.org/digital-logic/bcd-adder-in-digital-logic/">Here</a> is a nice explanation of the BCD adder logic. The gates in the upper left side detect conditions for BCD corrections of the lower 4-bit and the higher 4-bit independently resulting in the signals HALF_CY and FULL_CY.<br>
+The circuitry in the lower left corner can generate the values 0x06 or 0x60 on the ALU_B bus for adding the correction.<br>
+<h5 style="text-align: center;">Conditional Branches</h5>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_12/simttl_bcc.png"/>
+</div>
+<br>
+The SimTTL screenshot shows a number of branch executions over positive and negative distances with and without corrections. Here is the code:
+<div class="box"><pre>
+FEA0  90 6B        CC4           BCC $FF0D		; BCC VC1
+...
+FF07  B0 FA        CC1           BCS $FF03		; BCS END
+FF09  90 55                      BCC $FF60		; BCC CC2
+FF0B  90 93        CC3           BCC $FEA0		; BCC CC4
+FF0D  50 53        VC1           BVC $FF62		; BVC VC2
+...
+FF60  90 A9        CC2           BCC $FF0B		; BCC CC3
+</pre></div>
+The first instruction in the screenshot is BCS while CF=L showing that the branch is not executed in this case. The addition is executed in the ALU and AL is loaded, but not PC_H.<br> The following BCC starts the same way, but SPEC_COND is set diverting the micro code to execute the branch by continuing with activating /LD_PC_H at the blue marker together with /OE_PC_H.<br>
+A backwards branch starts at the yellow marker and continues in the same way as the previous branch, even though FCY_COND and HCY_COND are set.<br>
+It is followed by another backwards instruction over a page boundary that requires a correction of the high part of PC to get from the wrong 0xFFA0 to 0xFEA0.<br>
+The last branch is forward again back over the page limit requiring again correction from 0xFE0D to 0xFF0D.<br>
+SPEC_COND is active to execute the branch, HCY_NEG is active when the address calculation result is negative (backwards) and FCY_COND is active to correct forward calculations or inactive to correct backward address calculations.<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_12/mc_bcc.png"/>
+</div>
+<br>
+Here are the micro codes for all these conditions. The other cases where SPEC_COND is low are identical and collapsed here.<br>
+<h5 style="text-align: center;">Conditional Branches</h5>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_12/simttl_bcc.png"/>
+</div>
+<br>
+<br>
+<h4 style="text-align: center;">Page 13: Processor Port</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_13/processor_port.png"/>
+</div>
+<br>
+The difference between the processor versions 6502 and 6510 is the addition of the <a href="https://www.c64os.com/post/6510procport">Processor Port.</a> As described in this article, the 6 available bits are used to control memory mapping and the cassette interface. On this board, the port is 8-bit wide but only the memory mapping is implemented. The other bits are freely available.<br>
+The port could be simply an output register only for this case, but to make it compatible with the 6510 processor the in/out direction register and the read buffers are also implemented. This way, the available bits can be programmed as inputs or outputs.<br><br>
+Here is the access table from the 6510:
+<table class="center">
+  <tr>
+    <th>Address</th>
+    <th>Read Operation</th>
+    <th>Write Operation</th>
+  </tr>
+  <tr>
+    <td>0x0000</td>
+    <td>Direction In Buffer</td>
+    <td>Direction Out Register</td>
+  </tr>
+  <tr>
+    <td>0x0001</td>
+    <td>Data Input Buffer</td>
+    <td>Data Output Register</td>
+  </tr>
+</table>
+The address bits A1 to A15 have to be low, which is detected via the tripple input NOR gates (74HCT27) and the 8-input NAND (74HCT30), while AB0 and R/W are connected to the 74HCT139 decoder, which provides the 4 signals for the registers and buffers.<br>
+The outputs of the direction register are connected to individual bus buffer gates (74HCT125) so, that each bit can be activated or tristated independently of the logical state of the data output register. The read input buffers (74HCT541) are connected directly to the direction bits and the port bits.<br>
+In the 6510, the processor port bits are inactive/tristate until programmed. That's why there are pull-up resistors in the C64 to make sure, the kernal is addressed with port bits 0..2 all high. Here, both 8-bit channels contain pull-up resistor networks. One takes care of the data outpts and the other makes sure none of the tri-state buffers are activated. In addition there is the D-Flip-Flop, which is cleared with /RESET, disabling the direction write register outputs, so the pull-ups can keep the 74HCT125 gates in tristate until the first write operation to the direction register.
+<br>
+<br>
+<h4 style="text-align: center;">Page 14: External Memory</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_14/external_memory.png"/>
+</div>
+<br>
+The C64 had up to 64K Byte RAM and additional ROM areas that can be mapped. Today the memory selection is so much easier. So, here are 64K Byte static RAM and 128K Flash with only the lower 64K in use here. The connections of adress bus and data bus are straight forward. The chip select generation is a bit more complicated to imitate the C64 scheme (see <a href="https://www.c64os.com/post/6510procport">Processor Port</a>)
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_14/procportmapping.png"/>
+</div>
+<br>
+The C64 uses a <a href="https://en.wikipedia.org/wiki/Programmable_Array_Logic">PAL</a> for chip select decoding. These were only one-time programmable, while the later developped <a href="https://en.wikipedia.org/wiki/Generic_Array_Logic">GAL</a> can be reprogrammed again and again. These GALs are still available and tools to <a href="https://www.microchip.com/en-us/development-tool/WinCUPL">compile</a> and <a href="https://www.amazon.com/dp/B0BFWKS53B">program</a>.
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_14/wincupl.png"/>
+</div>
+<br>
+The code for the gal is pretty simple, but it does all the required decoding from the table above. besides generating RAM and ROM chip select signals, it also generates chip selects for common peripherals even though they are not present on this board. They can be added via expansion connector.
+<br>
+<br>
+<h4 style="text-align: center;">Page 15: Miscellanous</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_15/misc.png"/>
+</div>
+<br>
+Here are connectors and leftover gates which inputs are pulled to ground to avoid jittering. The USB connector is only meant to inject power, for instance from a Raspberry Pi power supply or similar. The expansion connector also allows powering the board. But it is mainly there to connect additional boards for more functionality. Video and sound chips could be added there to create a full C64 system for instance.<br>
+In revision A I added a UART as expansion externally for communicating with the board. Even though I squeezed the board size compared to rev A, I was able to include the UART on the revision B board with a header for an <a href="https://www.digikey.com/en/products/detail/ftdi-future-technology-devices-international-ltd/TTL-232R-5V/2003493">5V-RS232-USB-Cable.</a> The UART can be connected to a PC acting as terminal for keyboard input and screen output. It can be left off, if not used.
+<br>
+<br>
+<h4 style="text-align: center;">Page 16: SimTTL Regs</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/page_16/simttl_regs.png"/>
+</div>
+<br>
+The chips on this page are not placed on the board and they don't appear in the BOM. They are only used for SimTTL to create viewable signals from their outputs. For instance, the CPU registers are captured from the data bus with some load signal, but their outputs are only shown, when they are read onto the data bus. These virtual chips capture the contents with the same signals, but always output their contents to be viewed in SimTTL.<br>
+This page can be ignored in regards to the board functionality.<br>
+<br><br><br><br>
 <br>
 <h4 style="text-align: center;">Status</h4>
 <br>
-I made the first board revision and had to realize that I should have finished simulating all instructions and micro code conditions completely. Now I'm pretty much done with all simulations and changing the schematic. I'm working on the new layout for Rev B.<br>
-I'm also still working on the documentation of the design.
+I'm done with all simulations and changing the schematic. The new layout for Rev B is finished and send to <a href="www.PCBway.com">PCBway</a> for manufacturing the boards.<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/layout.png"/>
+</div>
+The new board is a bit smaller in the vertical direction than the revision A board and all groups are re-organized for best display locations.<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/silkscreen.png"/>
+</div>
+As in the revision A I put some efforts into silkscreen to mark the different regions, display connectors and chips.
+
+
 

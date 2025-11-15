@@ -1,0 +1,207 @@
+pass 1
+
+LINE  LOC          LABEL         PICT
+
+   1               ; ================================================
+   2               ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+   3               ; SPDX-License-Identifier: BeerWare
+   4               ;
+   5               ; Testing all branch conditions
+   6               ;
+   7               ; paste here to create binary: 
+   8               ; https://masswerk.at/6502/assembler.html
+   9               ;=================================================
+
+  11  FE00                       * = $FE00
+  12  FE00         NMI           
+  13  FE00                       RTI
+  15  FE01         L0            
+  16  FE01                       RTS
+  17                             ;=======================
+  18  FE02         MAIN          
+  19  FE02                       CLC
+  20  FE03                       CLV
+  21  FE04                       LDA #0
+  22  FE06                       BCS MAIN
+  23  FE08                       BMI MAIN
+  24  FE0A                       BNE MAIN
+  25  FE0C                       BVS MAIN
+  26  FE0E                       JMP CC1
+  28  FE11         MAIN2         
+  29  FE11                       SEC
+  30  FE12                       LDA #$FF
+  31  FE14                       BCC MAIN
+  32  FE16                       BPL MAIN
+  33  FE18                       BEQ MAIN
+  34  FE1A                       BVC MAIN
+  35  FE1C                       JMP CS1
+  37                             ;=======================
+  38  FEA0                       * = $FEA0
+  39  FEA0         CC4           BCC VC1
+  40  FEA2         VC4           BVC EQ1
+  41  FEA4         EQ4           BEQ PL1
+  42  FEA6         PL4           BPL NEXT
+  44  FEA8         CS4           BCS VS1
+  45  FEAA         VS4           BVS NE1
+  46  FEAC         NE4           BEQ MI1
+  47  FEAE         MI4           BPL END
+  50                             ;=======================	
+  51  FF00                       * = $FF00
+  52  FF00         NEXT          
+  53  FF00                       JMP MAIN2
+  54  FF03         END           
+  55  FF03                       JMP MAIN
+  57  FF06         CC1           BCC CC2
+  58  FF08         CC3           BCC CC4
+  60  FF0A         VC1           BVC VC2
+  61  FF0C         VC3           BVC VC4
+  63  FF0E         EQ1           BEQ EQ2
+  64  FF10         EQ3           BEQ EQ4
+  66  FF12         PL1           BPL PL2
+  67  FF14         PL3           BPL PL4
+  70  FF16         CS1           BCS CS2
+  71  FF18         CS3           BCS CS4
+  73  FF1A         VS1           BVS VS2
+  74  FF1C         VS3           BVS VS4
+  76  FF1E         NE1           BNE NE2
+  77  FF20         NE3           BNE NE4
+  79  FF22         MI1           BMI MI2
+  80  FF24         MI3           BMI MI4
+  84                             ;=======================
+  85  FF60                       * = $FF60
+  86  FF60         CC2           BCC CC3
+  87  FF62         VC2           BVC VC3
+  88  FF64         EQ2           BEQ EQ3
+  89  FF66         PL2           BPL PL3
+  91  FF68         CS2           BCS CS3
+  92  FF6A         VS2           BVS VS3
+  93  FF6C         NE2           BNE NE3
+  94  FF6E         MI2           BMI MI3
+  96  FFEF                       * = $FFEF
+  97                             ; Fill up to FFEF
+  98  FFEF                       BRK
+
+symbols
+ CC1               $FF06
+ CC2               $FF60
+ CC3               $FF08
+ CC4               $FEA0
+ CS1               $FF16
+ CS2               $FF68
+ CS3               $FF18
+ CS4               $FEA8
+ END               $FF03
+ EQ1               $FF0E
+ EQ2               $FF64
+ EQ3               $FF10
+ EQ4               $FEA4
+ L0                $FE01
+ MAIN              $FE02
+ MAIN2             $FE11
+ MI1               $FF22
+ MI2               $FF6E
+ MI3               $FF24
+ MI4               $FEAE
+ NE1               $FF1E
+ NE2               $FF6C
+ NE3               $FF20
+ NE4               $FEAC
+ NEXT              $FF00
+ NMI               $FE00
+ PL1               $FF12
+ PL2               $FF66
+ PL3               $FF14
+ PL4               $FEA6
+ VC1               $FF0A
+ VC2               $FF62
+ VC3               $FF0C
+ VC4               $FEA2
+ VS1               $FF1A
+ VS2               $FF6A
+ VS3               $FF1C
+ VS4               $FEAA
+
+pass 2
+
+LOC   CODE         LABEL         INSTRUCTION
+
+                   ; ================================================
+                   ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+                   ; SPDX-License-Identifier: BeerWare
+                   ;
+                   ; Testing all branch conditions
+                   ;
+                   ; paste here to create binary: 
+                   ; https://masswerk.at/6502/assembler.html
+                   ;=================================================
+
+FE00                             * = $FE00
+FE00               NMI           
+FE00  40                         RTI
+FE01               L0            
+FE01  60                         RTS
+                                 ;=======================
+FE02               MAIN          
+FE02  18                         CLC
+FE03  B8                         CLV
+FE04  A9 00                      LDA #$00
+FE06  B0 FA                      BCS $FE02
+FE08  30 F8                      BMI $FE02
+FE0A  D0 F6                      BNE $FE02
+FE0C  70 F4                      BVS $FE02
+FE0E  4C 06 FF                   JMP $FF06
+FE11               MAIN2         
+FE11  38                         SEC
+FE12  A9 FF                      LDA #$FF
+FE14  90 EC                      BCC $FE02
+FE16  10 EA                      BPL $FE02
+FE18  F0 E8                      BEQ $FE02
+FE1A  50 E6                      BVC $FE02
+FE1C  4C 16 FF                   JMP $FF16
+                                 ;=======================
+FEA0                             * = $FEA0
+FEA0  90 68        CC4           BCC $FF0A
+FEA2  50 6A        VC4           BVC $FF0E
+FEA4  F0 6C        EQ4           BEQ $FF12
+FEA6  10 58        PL4           BPL $FF00
+FEA8  B0 70        CS4           BCS $FF1A
+FEAA  70 72        VS4           BVS $FF1E
+FEAC  F0 74        NE4           BEQ $FF22
+FEAE  10 53        MI4           BPL $FF03
+                                 ;=======================	
+FF00                             * = $FF00
+FF00               NEXT          
+FF00  4C 11 FE                   JMP $FE11
+FF03               END           
+FF03  4C 02 FE                   JMP $FE02
+FF06  90 58        CC1           BCC $FF60
+FF08  90 96        CC3           BCC $FEA0
+FF0A  50 56        VC1           BVC $FF62
+FF0C  50 94        VC3           BVC $FEA2
+FF0E  F0 54        EQ1           BEQ $FF64
+FF10  F0 92        EQ3           BEQ $FEA4
+FF12  10 52        PL1           BPL $FF66
+FF14  10 90        PL3           BPL $FEA6
+FF16  B0 50        CS1           BCS $FF68
+FF18  B0 8E        CS3           BCS $FEA8
+FF1A  70 4E        VS1           BVS $FF6A
+FF1C  70 8C        VS3           BVS $FEAA
+FF1E  D0 4C        NE1           BNE $FF6C
+FF20  D0 8A        NE3           BNE $FEAC
+FF22  30 4A        MI1           BMI $FF6E
+FF24  30 88        MI3           BMI $FEAE
+                                 ;=======================
+FF60                             * = $FF60
+FF60  90 A6        CC2           BCC $FF08
+FF62  50 A8        VC2           BVC $FF0C
+FF64  F0 AA        EQ2           BEQ $FF10
+FF66  10 AC        PL2           BPL $FF14
+FF68  B0 AE        CS2           BCS $FF18
+FF6A  70 B0        VS2           BVS $FF1C
+FF6C  D0 B2        NE2           BNE $FF20
+FF6E  30 B4        MI2           BMI $FF24
+FFEF                             * = $FFEF
+                                 ; Fill up to FFEF
+FFEF  00                         BRK
+
+done (code: FE00..FFEF).

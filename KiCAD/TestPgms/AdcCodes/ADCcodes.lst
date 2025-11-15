@@ -1,0 +1,458 @@
+pass 1
+
+LINE  LOC          LABEL         PICT
+
+   1               ; ================================================
+   2               ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+   3               ; SPDX-License-Identifier: BeerWare
+   4               ;
+   5               ; Testing all ADC codes in decimal mode 
+   6               ; including address calculation
+   7               ;
+   8               ; paste here to create binary: 
+   9               ; https://masswerk.at/6502/assembler.html
+  10               ;=================================================
+
+  13  FE00                       * = $FE00
+  14  FE00         NMI           
+  15  FE00                       RTI
+  17  FE01         FUNC          
+  18  FE01                       RTS
+  20  FE02         MAIN          
+  21  FE02                       LDX #$10
+  22  FE04                       LDY #$20
+  23  FE06                       LDA #$34
+  24  FE08                       STA $10,X
+  25  FE0A                       STA $10,Y
+  26  FE0D                       LDA #$12
+  27  FE0F                       STA $11,X
+  28  FE11                       STA $11,Y
+  29  FE14                       SED
+  31                             ; Testing Op Codes
+  32                             ;==============
+  33  FE15                       LDA #$22
+  34  FE17                       STA ($10,X)
+  35  FE19                       LDA #$55
+  36  FE1B                       ADC ($10,X)
+  38  FE1D                       LDA #$09
+  39  FE1F                       STA ($10,X)
+  40  FE21                       LDA #$55
+  41  FE23                       ADC ($10,X)
+  43  FE25                       LDA #$90
+  44  FE27                       STA ($10,X)
+  45  FE29                       LDA #$55
+  46  FE2B                       ADC ($10,X)
+  48  FE2D                       LDA #$99
+  49  FE2F                       STA ($10,X)
+  50  FE31                       LDA #$55
+  51  FE33                       ADC ($10,X)
+  53                             ;==============
+  54  FE35                       LDA #$22
+  55  FE37                       STA $22
+  56  FE39                       LDA #$55
+  57  FE3B                       ADC $22
+  59  FE3D                       LDA #$09
+  60  FE3F                       STA $09
+  61  FE41                       LDA #$55
+  62  FE43                       ADC $09
+  64  FE45                       LDA #$90
+  65  FE47                       STA $90
+  66  FE49                       LDA #$55
+  67  FE4B                       ADC $90
+  69  FE4D                       LDA #$99
+  70  FE4F                       STA $99
+  71  FE51                       LDA #$55
+  72  FE53                       ADC $99
+  74                             ;==============	
+  75  FE55                       LDA #$55
+  76  FE57                       ADC #$11
+  78  FE59                       LDA #$55
+  79  FE5B                       ADC #$09
+  81  FE5D                       LDA #$55
+  82  FE5F                       ADC #$90
+  84  FE61                       LDA #$55
+  85  FE63                       ADC #$99
+  87                             ;==============	
+  88  FE65                       LDA #$22
+  89  FE67                       STA $8022
+  90  FE6A                       LDA #$55
+  91  FE6C                       ADC $8022
+  93  FE6F                       LDA #$09
+  94  FE71                       STA $8009
+  95  FE74                       LDA #$55
+  96  FE76                       ADC $8009
+  98  FE79                       LDA #$90
+  99  FE7B                       STA $8090
+ 100  FE7E                       LDA #$55
+ 101  FE80                       ADC $8090
+ 103  FE83                       LDA #$99
+ 104  FE85                       STA $8099
+ 105  FE88                       LDA #$55
+ 106  FE8A                       ADC $8099
+ 108                             ;==============
+ 109  FE8D                       LDA #$13
+ 110  FE8F                       STA $11
+ 111  FE91                       LDA #$67
+ 112  FE93                       STA $10
+ 114  FE95                       LDA #$22
+ 115  FE97                       STA ($10),Y
+ 116  FE99                       LDA #$55
+ 117  FE9B                       ADC ($10),Y
+ 119  FE9D                       LDA #$09
+ 120  FE9F                       STA ($10),Y
+ 121  FEA1                       LDA #$55
+ 122  FEA3                       ADC ($10),Y
+ 124  FEA5                       LDA #$90
+ 125  FEA7                       STA ($10),Y
+ 126  FEA9                       LDA #$55
+ 127  FEAB                       ADC ($10),Y
+ 129  FEAD                       LDA #$99
+ 130  FEAF                       STA ($10),Y
+ 131  FEB1                       LDA #$55
+ 132  FEB3                       ADC ($10),Y
+ 134                             ;==============
+ 135  FEB5                       LDA #$13
+ 136  FEB7                       STA $11
+ 137  FEB9                       LDA #$FF
+ 138  FEBB                       STA $10
+ 140  FEBD                       LDA #$22
+ 141  FEBF                       STA ($10),Y
+ 142  FEC1                       LDA #$55
+ 143  FEC3                       ADC ($10),Y
+ 145  FEC5                       LDA #$09
+ 146  FEC7                       STA ($10),Y
+ 147  FEC9                       LDA #$55
+ 148  FECB                       ADC ($10),Y
+ 150  FECD                       LDA #$90
+ 151  FECF                       STA ($10),Y
+ 152  FED1                       LDA #$55
+ 153  FED3                       ADC ($10),Y
+ 155  FED5                       LDA #$99
+ 156  FED7                       STA ($10),Y
+ 157  FED9                       LDA #$55
+ 158  FEDB                       ADC ($10),Y
+ 160                             ;==============	
+ 162  FEDD                       LDA #$22
+ 163  FEDF                       STA $10,X
+ 164  FEE1                       LDA #$55
+ 165  FEE3                       ADC $10,X
+ 167  FEE5                       LDA #$09
+ 168  FEE7                       STA $10,X
+ 169  FEE9                       LDA #$55
+ 170  FEEB                       ADC $10,X
+ 172  FEED                       LDA #$90
+ 173  FEEF                       STA $10,X
+ 174  FEF1                       LDA #$55
+ 175  FEF3                       ADC $10,X
+ 177  FEF5                       LDA #$99
+ 178  FEF7                       STA $10,X
+ 179  FEF9                       LDA #$55
+ 180  FEFB                       ADC $10,X
+ 182                             ;==============
+ 183  FEFD                       LDY #$11
+ 184  FEFF                       LDA #$22
+ 185  FF01                       STA $1234,Y
+ 186  FF04                       LDA #$55
+ 187  FF06                       ADC $1234,Y
+ 189  FF09                       LDA #$09
+ 190  FF0B                       STA $1234,Y
+ 191  FF0E                       LDA #$55
+ 192  FF10                       ADC $1234,Y
+ 194  FF13                       LDA #$90
+ 195  FF15                       STA $1234,Y
+ 196  FF18                       LDA #$55
+ 197  FF1A                       ADC $1234,Y
+ 199  FF1D                       LDA #$99
+ 200  FF1F                       STA $1234,Y
+ 201  FF22                       LDA #$55
+ 202  FF24                       ADC $1234,Y
+ 204                             ;==============
+ 205  FF27                       LDY #$FF
+ 206  FF29                       LDA #$22
+ 207  FF2B                       STA $1234,Y
+ 208  FF2E                       LDA #$55
+ 209  FF30                       ADC $1234,Y
+ 211  FF33                       LDA #$09
+ 212  FF35                       STA $1234,Y
+ 213  FF38                       LDA #$55
+ 214  FF3A                       ADC $1234,Y
+ 216  FF3D                       LDA #$90
+ 217  FF3F                       STA $1234,Y
+ 218  FF42                       LDA #$55
+ 219  FF44                       ADC $1234,Y
+ 221  FF47                       LDA #$99
+ 222  FF49                       STA $1234,Y
+ 223  FF4C                       LDA #$55
+ 224  FF4E                       ADC $1234,Y
+ 227                             ;==============
+ 228  FF51                       LDX #$33
+ 229  FF53                       LDA #$22
+ 230  FF55                       STA $1234,X
+ 231  FF58                       LDA #$55
+ 232  FF5A                       ADC $1234,X
+ 234  FF5D                       LDA #$09
+ 235  FF5F                       STA $1234,X
+ 236  FF62                       LDA #$55
+ 237  FF64                       ADC $1234,X
+ 239  FF67                       LDA #$90
+ 240  FF69                       STA $1234,X
+ 241  FF6C                       LDA #$55
+ 242  FF6E                       ADC $1234,X
+ 244  FF71                       LDA #$99
+ 245  FF73                       STA $1234,X
+ 246  FF76                       LDA #$55
+ 247  FF78                       ADC $1234,X
+ 250                             ;==============
+ 251  FF7B                       LDX #$FF
+ 252  FF7D                       LDA #$22
+ 253  FF7F                       STA $1234,X
+ 254  FF82                       LDA #$55
+ 255  FF84                       ADC $1234,X
+ 257  FF87                       LDA #$09
+ 258  FF89                       STA $1234,X
+ 259  FF8C                       LDA #$55
+ 260  FF8E                       ADC $1234,X
+ 262  FF91                       LDA #$90
+ 263  FF93                       STA $1234,X
+ 264  FF96                       LDA #$55
+ 265  FF98                       ADC $1234,X
+ 267  FF9B                       LDA #$99
+ 268  FF9D                       STA $1234,X
+ 269  FFA0                       LDA #$55
+ 270  FFA2                       ADC $1234,X
+ 273  FFEF                       * = $FFEF
+ 274                             ; Fill up to FFEF
+ 275  FFEF                       BRK
+
+symbols
+ FUNC              $FE01
+ MAIN              $FE02
+ NMI               $FE00
+
+pass 2
+
+LOC   CODE         LABEL         INSTRUCTION
+
+                   ; ================================================
+                   ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+                   ; SPDX-License-Identifier: BeerWare
+                   ;
+                   ; Testing all ADC codes in decimal mode 
+                   ; including address calculation
+                   ;
+                   ; paste here to create binary: 
+                   ; https://masswerk.at/6502/assembler.html
+                   ;=================================================
+
+FE00                             * = $FE00
+FE00               NMI           
+FE00  40                         RTI
+FE01               FUNC          
+FE01  60                         RTS
+FE02               MAIN          
+FE02  A2 10                      LDX #$10
+FE04  A0 20                      LDY #$20
+FE06  A9 34                      LDA #$34
+FE08  95 10                      STA $10,X
+FE0A  99 10 00                   STA $0010,Y
+FE0D  A9 12                      LDA #$12
+FE0F  95 11                      STA $11,X
+FE11  99 11 00                   STA $0011,Y
+FE14  F8                         SED
+                                 ; Testing Op Codes
+                                 ;==============
+FE15  A9 22                      LDA #$22
+FE17  81 10                      STA ($10,X)
+FE19  A9 55                      LDA #$55
+FE1B  61 10                      ADC ($10,X)
+FE1D  A9 09                      LDA #$09
+FE1F  81 10                      STA ($10,X)
+FE21  A9 55                      LDA #$55
+FE23  61 10                      ADC ($10,X)
+FE25  A9 90                      LDA #$90
+FE27  81 10                      STA ($10,X)
+FE29  A9 55                      LDA #$55
+FE2B  61 10                      ADC ($10,X)
+FE2D  A9 99                      LDA #$99
+FE2F  81 10                      STA ($10,X)
+FE31  A9 55                      LDA #$55
+FE33  61 10                      ADC ($10,X)
+                                 ;==============
+FE35  A9 22                      LDA #$22
+FE37  85 22                      STA $22
+FE39  A9 55                      LDA #$55
+FE3B  65 22                      ADC $22
+FE3D  A9 09                      LDA #$09
+FE3F  85 09                      STA $09
+FE41  A9 55                      LDA #$55
+FE43  65 09                      ADC $09
+FE45  A9 90                      LDA #$90
+FE47  85 90                      STA $90
+FE49  A9 55                      LDA #$55
+FE4B  65 90                      ADC $90
+FE4D  A9 99                      LDA #$99
+FE4F  85 99                      STA $99
+FE51  A9 55                      LDA #$55
+FE53  65 99                      ADC $99
+                                 ;==============	
+FE55  A9 55                      LDA #$55
+FE57  69 11                      ADC #$11
+FE59  A9 55                      LDA #$55
+FE5B  69 09                      ADC #$09
+FE5D  A9 55                      LDA #$55
+FE5F  69 90                      ADC #$90
+FE61  A9 55                      LDA #$55
+FE63  69 99                      ADC #$99
+                                 ;==============	
+FE65  A9 22                      LDA #$22
+FE67  8D 22 80                   STA $8022
+FE6A  A9 55                      LDA #$55
+FE6C  6D 22 80                   ADC $8022
+FE6F  A9 09                      LDA #$09
+FE71  8D 09 80                   STA $8009
+FE74  A9 55                      LDA #$55
+FE76  6D 09 80                   ADC $8009
+FE79  A9 90                      LDA #$90
+FE7B  8D 90 80                   STA $8090
+FE7E  A9 55                      LDA #$55
+FE80  6D 90 80                   ADC $8090
+FE83  A9 99                      LDA #$99
+FE85  8D 99 80                   STA $8099
+FE88  A9 55                      LDA #$55
+FE8A  6D 99 80                   ADC $8099
+                                 ;==============
+FE8D  A9 13                      LDA #$13
+FE8F  85 11                      STA $11
+FE91  A9 67                      LDA #$67
+FE93  85 10                      STA $10
+FE95  A9 22                      LDA #$22
+FE97  91 10                      STA ($10),Y
+FE99  A9 55                      LDA #$55
+FE9B  71 10                      ADC ($10),Y
+FE9D  A9 09                      LDA #$09
+FE9F  91 10                      STA ($10),Y
+FEA1  A9 55                      LDA #$55
+FEA3  71 10                      ADC ($10),Y
+FEA5  A9 90                      LDA #$90
+FEA7  91 10                      STA ($10),Y
+FEA9  A9 55                      LDA #$55
+FEAB  71 10                      ADC ($10),Y
+FEAD  A9 99                      LDA #$99
+FEAF  91 10                      STA ($10),Y
+FEB1  A9 55                      LDA #$55
+FEB3  71 10                      ADC ($10),Y
+                                 ;==============
+FEB5  A9 13                      LDA #$13
+FEB7  85 11                      STA $11
+FEB9  A9 FF                      LDA #$FF
+FEBB  85 10                      STA $10
+FEBD  A9 22                      LDA #$22
+FEBF  91 10                      STA ($10),Y
+FEC1  A9 55                      LDA #$55
+FEC3  71 10                      ADC ($10),Y
+FEC5  A9 09                      LDA #$09
+FEC7  91 10                      STA ($10),Y
+FEC9  A9 55                      LDA #$55
+FECB  71 10                      ADC ($10),Y
+FECD  A9 90                      LDA #$90
+FECF  91 10                      STA ($10),Y
+FED1  A9 55                      LDA #$55
+FED3  71 10                      ADC ($10),Y
+FED5  A9 99                      LDA #$99
+FED7  91 10                      STA ($10),Y
+FED9  A9 55                      LDA #$55
+FEDB  71 10                      ADC ($10),Y
+                                 ;==============	
+FEDD  A9 22                      LDA #$22
+FEDF  95 10                      STA $10,X
+FEE1  A9 55                      LDA #$55
+FEE3  75 10                      ADC $10,X
+FEE5  A9 09                      LDA #$09
+FEE7  95 10                      STA $10,X
+FEE9  A9 55                      LDA #$55
+FEEB  75 10                      ADC $10,X
+FEED  A9 90                      LDA #$90
+FEEF  95 10                      STA $10,X
+FEF1  A9 55                      LDA #$55
+FEF3  75 10                      ADC $10,X
+FEF5  A9 99                      LDA #$99
+FEF7  95 10                      STA $10,X
+FEF9  A9 55                      LDA #$55
+FEFB  75 10                      ADC $10,X
+                                 ;==============
+FEFD  A0 11                      LDY #$11
+FEFF  A9 22                      LDA #$22
+FF01  99 34 12                   STA $1234,Y
+FF04  A9 55                      LDA #$55
+FF06  79 34 12                   ADC $1234,Y
+FF09  A9 09                      LDA #$09
+FF0B  99 34 12                   STA $1234,Y
+FF0E  A9 55                      LDA #$55
+FF10  79 34 12                   ADC $1234,Y
+FF13  A9 90                      LDA #$90
+FF15  99 34 12                   STA $1234,Y
+FF18  A9 55                      LDA #$55
+FF1A  79 34 12                   ADC $1234,Y
+FF1D  A9 99                      LDA #$99
+FF1F  99 34 12                   STA $1234,Y
+FF22  A9 55                      LDA #$55
+FF24  79 34 12                   ADC $1234,Y
+                                 ;==============
+FF27  A0 FF                      LDY #$FF
+FF29  A9 22                      LDA #$22
+FF2B  99 34 12                   STA $1234,Y
+FF2E  A9 55                      LDA #$55
+FF30  79 34 12                   ADC $1234,Y
+FF33  A9 09                      LDA #$09
+FF35  99 34 12                   STA $1234,Y
+FF38  A9 55                      LDA #$55
+FF3A  79 34 12                   ADC $1234,Y
+FF3D  A9 90                      LDA #$90
+FF3F  99 34 12                   STA $1234,Y
+FF42  A9 55                      LDA #$55
+FF44  79 34 12                   ADC $1234,Y
+FF47  A9 99                      LDA #$99
+FF49  99 34 12                   STA $1234,Y
+FF4C  A9 55                      LDA #$55
+FF4E  79 34 12                   ADC $1234,Y
+                                 ;==============
+FF51  A2 33                      LDX #$33
+FF53  A9 22                      LDA #$22
+FF55  9D 34 12                   STA $1234,X
+FF58  A9 55                      LDA #$55
+FF5A  7D 34 12                   ADC $1234,X
+FF5D  A9 09                      LDA #$09
+FF5F  9D 34 12                   STA $1234,X
+FF62  A9 55                      LDA #$55
+FF64  7D 34 12                   ADC $1234,X
+FF67  A9 90                      LDA #$90
+FF69  9D 34 12                   STA $1234,X
+FF6C  A9 55                      LDA #$55
+FF6E  7D 34 12                   ADC $1234,X
+FF71  A9 99                      LDA #$99
+FF73  9D 34 12                   STA $1234,X
+FF76  A9 55                      LDA #$55
+FF78  7D 34 12                   ADC $1234,X
+                                 ;==============
+FF7B  A2 FF                      LDX #$FF
+FF7D  A9 22                      LDA #$22
+FF7F  9D 34 12                   STA $1234,X
+FF82  A9 55                      LDA #$55
+FF84  7D 34 12                   ADC $1234,X
+FF87  A9 09                      LDA #$09
+FF89  9D 34 12                   STA $1234,X
+FF8C  A9 55                      LDA #$55
+FF8E  7D 34 12                   ADC $1234,X
+FF91  A9 90                      LDA #$90
+FF93  9D 34 12                   STA $1234,X
+FF96  A9 55                      LDA #$55
+FF98  7D 34 12                   ADC $1234,X
+FF9B  A9 99                      LDA #$99
+FF9D  9D 34 12                   STA $1234,X
+FFA0  A9 55                      LDA #$55
+FFA2  7D 34 12                   ADC $1234,X
+FFEF                             * = $FFEF
+                                 ; Fill up to FFEF
+FFEF  00                         BRK
+
+done (code: FE00..FFEF).

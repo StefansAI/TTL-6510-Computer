@@ -1,0 +1,12 @@
+* = $E200
+ LDA #$07
+ STA $00
+ STA $01
+L1:
+ lda #$12
+ clc
+L2:
+ adc #$34
+ bcc L2
+ jmp L1
+ 

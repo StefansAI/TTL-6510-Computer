@@ -1,0 +1,218 @@
+pass 1
+
+LINE  LOC          LABEL         PICT
+
+   1               ; ================================================
+   2               ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+   3               ; SPDX-License-Identifier: BeerWare
+   4               ;
+   5               ; Testing all address calculating codes 
+   6               ;
+   7               ; paste here to create binary: 
+   8               ; https://masswerk.at/6502/assembler.html
+   9               ;=================================================
+
+  12  FE00                       * = $FE00
+  13  FE00         NMI           
+  14  FE00                       RTI
+  16  FE01         L0            
+  17  FE01                       RTS
+  19  FE02         MAIN          
+  20  FE02                       LDA #$12
+  21  FE04                       STA $11
+  22  FE06                       STA $1235
+  23  FE09                       LDA #$22
+  24  FE0B                       STA $10
+  25  FE0D                       STA $1234
+  27  FE10                       LDA #$12
+  28  FE12                       STA $13
+  29  FE14                       STA $1237
+  30  FE17                       LDA #$FF
+  31  FE19                       STA $12
+  32  FE1B                       STA $1236
+  34  FE1E                       LDX #$66
+  35  FE20                       LDY #$67
+  36  FE22                       LDA #$12
+  39                             ; Testing Op Codes
+  40  FE24                       ADC $1234,X
+  41  FE27                       ADC $12F4,X
+  43  FE2A                       ROR $1234,X
+  44  FE2D                       ROR $12F4,X
+  46  FE30                       STA ($10),Y
+  47  FE32                       STA ($12),Y
+  49  FE34                       STA $1234,Y
+  50  FE37                       STA $12F4,Y
+  52  FE3A                       STA $1234,X
+  53  FE3D                       STA $12F4,X
+  55  FE40                       LDA ($10),Y
+  56  FE42                       LDA ($12),Y
+  58  FE44                       LDA $1234,Y
+  59  FE47                       LDA $12F4,Y
+  61  FE4A                       LDY $1234,X
+  62  FE4D                       LDY $12F4,X
+  64  FE50                       LDA $1234,X
+  65  FE53                       LDA $12F4,X
+  67  FE56                       LDX $1234,Y
+  68  FE59                       LDX $12F4,Y
+  70  FE5C                       CMP ($10),Y
+  71  FE5E                       CMP ($12),Y
+  73  FE60                       CMP $1234,Y
+  74  FE63                       CMP $12F4,Y
+  76  FE66                       CMP $1234,X
+  77  FE69                       CMP $12F4,X
+  79  FE6C                       DEC $1234,X
+  80  FE6F                       DEC $12F4,X
+  82  FE72                       SBC ($10),Y
+  83  FE74                       SBC ($12),Y
+  85  FE76                       SBC $1234,Y
+  86  FE79                       SBC $12F4,Y
+  88  FE7C                       SBC $1234,X
+  89  FE7F                       SBC $12F4,X
+  91  FE82                       INC $1234,X
+  92  FE85                       INC $12F4,X
+  94  FE88                       NOP
+  95                             ;==============================
+  96  FE89                       ORA ($10),Y
+  97  FE8B                       ORA ($12),Y
+  99  FE8D                       ORA $1234,Y
+ 100  FE90                       ORA $12F6,Y
+ 102  FE93                       ORA $1234,X
+ 103  FE96                       ORA $12F6,X
+ 105  FE99                       ASL $1234,X
+ 106  FE9C                       ASL $12F6,X
+ 108  FE9F                       AND ($10),Y
+ 109  FEA1                       AND ($12),Y
+ 111  FEA3                       AND $1234,Y
+ 112  FEA6                       AND $12F6,Y
+ 114  FEA9                       AND $1234,X
+ 115  FEAC                       AND $12F6,X
+ 117  FEAF                       ROL $1234,X
+ 118  FEB2                       ROL $12F6,X
+ 120  FEB5                       EOR ($10),Y
+ 121  FEB7                       EOR ($12),Y
+ 123  FEB9                       EOR $1234,Y
+ 124  FEBC                       EOR $12F6,Y
+ 126  FEBF                       EOR $1234,X
+ 127  FEC2                       EOR $12F6,X
+ 129  FEC5                       LSR $1234,X
+ 130  FEC8                       LSR $12F4,X
+ 132  FECB                       ADC ($10),Y
+ 133  FECD                       ADC ($12),Y
+ 135  FECF                       ADC $1234,Y
+ 136  FED2                       ADC $12F4,Y
+ 138  FFEF                       * = $FFEF
+ 139                             ; Fill up to FFF0
+ 140  FFEF                       BRK
+
+symbols
+ L0                $FE01
+ MAIN              $FE02
+ NMI               $FE00
+
+pass 2
+
+LOC   CODE         LABEL         INSTRUCTION
+
+                   ; ================================================
+                   ; SPDX-FileCopyrightText: 2024/25 Stefan Warnke
+                   ; SPDX-License-Identifier: BeerWare
+                   ;
+                   ; Testing all address calculating codes 
+                   ;
+                   ; paste here to create binary: 
+                   ; https://masswerk.at/6502/assembler.html
+                   ;=================================================
+
+FE00                             * = $FE00
+FE00               NMI           
+FE00  40                         RTI
+FE01               L0            
+FE01  60                         RTS
+FE02               MAIN          
+FE02  A9 12                      LDA #$12
+FE04  85 11                      STA $11
+FE06  8D 35 12                   STA $1235
+FE09  A9 22                      LDA #$22
+FE0B  85 10                      STA $10
+FE0D  8D 34 12                   STA $1234
+FE10  A9 12                      LDA #$12
+FE12  85 13                      STA $13
+FE14  8D 37 12                   STA $1237
+FE17  A9 FF                      LDA #$FF
+FE19  85 12                      STA $12
+FE1B  8D 36 12                   STA $1236
+FE1E  A2 66                      LDX #$66
+FE20  A0 67                      LDY #$67
+FE22  A9 12                      LDA #$12
+                                 ; Testing Op Codes
+FE24  7D 34 12                   ADC $1234,X
+FE27  7D F4 12                   ADC $12F4,X
+FE2A  7E 34 12                   ROR $1234,X
+FE2D  7E F4 12                   ROR $12F4,X
+FE30  91 10                      STA ($10),Y
+FE32  91 12                      STA ($12),Y
+FE34  99 34 12                   STA $1234,Y
+FE37  99 F4 12                   STA $12F4,Y
+FE3A  9D 34 12                   STA $1234,X
+FE3D  9D F4 12                   STA $12F4,X
+FE40  B1 10                      LDA ($10),Y
+FE42  B1 12                      LDA ($12),Y
+FE44  B9 34 12                   LDA $1234,Y
+FE47  B9 F4 12                   LDA $12F4,Y
+FE4A  BC 34 12                   LDY $1234,X
+FE4D  BC F4 12                   LDY $12F4,X
+FE50  BD 34 12                   LDA $1234,X
+FE53  BD F4 12                   LDA $12F4,X
+FE56  BE 34 12                   LDX $1234,Y
+FE59  BE F4 12                   LDX $12F4,Y
+FE5C  D1 10                      CMP ($10),Y
+FE5E  D1 12                      CMP ($12),Y
+FE60  D9 34 12                   CMP $1234,Y
+FE63  D9 F4 12                   CMP $12F4,Y
+FE66  DD 34 12                   CMP $1234,X
+FE69  DD F4 12                   CMP $12F4,X
+FE6C  DE 34 12                   DEC $1234,X
+FE6F  DE F4 12                   DEC $12F4,X
+FE72  F1 10                      SBC ($10),Y
+FE74  F1 12                      SBC ($12),Y
+FE76  F9 34 12                   SBC $1234,Y
+FE79  F9 F4 12                   SBC $12F4,Y
+FE7C  FD 34 12                   SBC $1234,X
+FE7F  FD F4 12                   SBC $12F4,X
+FE82  FE 34 12                   INC $1234,X
+FE85  FE F4 12                   INC $12F4,X
+FE88  EA                         NOP
+                                 ;==============================
+FE89  11 10                      ORA ($10),Y
+FE8B  11 12                      ORA ($12),Y
+FE8D  19 34 12                   ORA $1234,Y
+FE90  19 F6 12                   ORA $12F6,Y
+FE93  1D 34 12                   ORA $1234,X
+FE96  1D F6 12                   ORA $12F6,X
+FE99  1E 34 12                   ASL $1234,X
+FE9C  1E F6 12                   ASL $12F6,X
+FE9F  31 10                      AND ($10),Y
+FEA1  31 12                      AND ($12),Y
+FEA3  39 34 12                   AND $1234,Y
+FEA6  39 F6 12                   AND $12F6,Y
+FEA9  3D 34 12                   AND $1234,X
+FEAC  3D F6 12                   AND $12F6,X
+FEAF  3E 34 12                   ROL $1234,X
+FEB2  3E F6 12                   ROL $12F6,X
+FEB5  51 10                      EOR ($10),Y
+FEB7  51 12                      EOR ($12),Y
+FEB9  59 34 12                   EOR $1234,Y
+FEBC  59 F6 12                   EOR $12F6,Y
+FEBF  5D 34 12                   EOR $1234,X
+FEC2  5D F6 12                   EOR $12F6,X
+FEC5  5E 34 12                   LSR $1234,X
+FEC8  5E F4 12                   LSR $12F4,X
+FECB  71 10                      ADC ($10),Y
+FECD  71 12                      ADC ($12),Y
+FECF  79 34 12                   ADC $1234,Y
+FED2  79 F4 12                   ADC $12F4,Y
+FFEF                             * = $FFEF
+                                 ; Fill up to FFF0
+FFEF  00                         BRK
+
+done (code: FE00..FFEF).

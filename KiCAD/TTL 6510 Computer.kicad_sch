@@ -1,0 +1,671 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "a212c6c5-fafd-4da9-bbe3-09155431f13a")
+	(paper "A")
+	(title_block
+		(title "TTL 6510 Computer")
+		(date "2025-10-20")
+		(rev "B")
+		(company "Stefan Warnke")
+		(comment 9 "CPU_6502_Opcodes.txt")
+	)
+	(lib_symbols)
+	(sheet
+		(at 107.95 176.53)
+		(size 48.26 8.89)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "00da8dee-b5da-4316-ab9c-3afa17c65176")
+		(property "Sheetname" "SimTTL_Regs"
+			(at 107.95 175.8184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "SimTTL_Regs.kicad_sch"
+			(at 107.95 186.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "16")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 38.1 101.6)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "03911495-8d47-4d34-b27a-78e44b2b8a7a")
+		(property "Sheetname" "ALU"
+			(at 38.1 100.8884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ALU.kicad_sch"
+			(at 38.1 127.5846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "10")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 63.5)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "41302e21-3d61-43b2-ae5a-597d1005b54a")
+		(property "Sheetname" "Micro Code Sequencer"
+			(at 88.9 62.7884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Micro_Code_Sequencer.kicad_sch"
+			(at 88.9 89.4846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 139.7)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "41a91df0-df36-40eb-ad30-cd5231b4b039")
+		(property "Sheetname" "External Memory"
+			(at 88.9 138.9884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "External_Memory.kicad_sch"
+			(at 88.9 165.6846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "14")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 38.1 25.4)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "462439c9-11de-40f5-a58c-973f8f9f660e")
+		(property "Sheetname" "Clock and Reset"
+			(at 38.1 24.6884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Clock_and_Reset.kicad_sch"
+			(at 38.1 51.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 101.6)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6b8a08cb-b869-47ec-9c87-a6c835f8d1f3")
+		(property "Sheetname" "Status Register"
+			(at 88.9 100.8884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Status_Register.kicad_sch"
+			(at 88.9 127.5846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 38.1 63.5)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6ba76368-a4b0-45ec-9ca5-09f1ccb2a0db")
+		(property "Sheetname" "Registers and DB Driver"
+			(at 38.1 62.7884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Registers_and_DB_Driver.kicad_sch"
+			(at 38.1 89.4846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 88.9 25.4)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "7ff573b9-c30f-4141-9fe7-83f8615ba24f")
+		(property "Sheetname" "Program Counter"
+			(at 88.9 24.6884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Program_Counter.kicad_sch"
+			(at 88.9 51.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 190.5 101.6)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "819030f5-00f8-4e60-9b7e-635ab792a5b9")
+		(property "Sheetname" "Processor Port"
+			(at 190.5 100.8884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Processor_Port.kicad_sch"
+			(at 190.5 127.5846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "13")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 139.7 139.7)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "93b7d6b4-51bf-42e3-8ce0-2b824dfac93f")
+		(property "Sheetname" "Miscellaneous"
+			(at 139.7 138.9884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Miscellaneous.kicad_sch"
+			(at 139.7 165.6846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "15")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 190.5 25.4)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a6d4a634-bc0e-4f2f-b6ad-acdd8e2726cc")
+		(property "Sheetname" "Stack Pointer"
+			(at 190.5 24.6884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Stack_Pointer.kicad_sch"
+			(at 190.5 51.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 139.7 25.4)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "aa9dc9ee-aa10-4c32-8e0e-79b17815ea95")
+		(property "Sheetname" "Address Register"
+			(at 139.7 24.6884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Adress_Register.kicad_sch"
+			(at 139.7 51.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 139.7 101.6)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "de6ce9ec-b032-4419-98e2-1861a458675a")
+		(property "Sheetname" "Special Conditions"
+			(at 139.7 100.8884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Special_Conditions.kicad_sch"
+			(at 139.7 127.5846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "12")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 190.5 63.5)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "e68fc9c1-5e87-4706-8c4c-4eb007298f47")
+		(property "Sheetname" "Exception Handling"
+			(at 190.5 62.7884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Exception_Handling.kicad_sch"
+			(at 190.5 89.4846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 139.7 63.5)
+		(size 38.1 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "fa48918c-bdef-4858-96d1-0a4876854631")
+		(property "Sheetname" "Instruction Decoder"
+			(at 139.7 62.7884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Instruction_Decoder.kicad_sch"
+			(at 139.7 89.4846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "TTL 6510 Computer"
+				(path "/a212c6c5-fafd-4da9-bbe3-09155431f13a"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+	(embedded_files
+		(file
+			(name "MyDrawingSheet.kicad_wks")
+			(type worksheet)
+			(data |KLUv/WD3CRUVAMYeYSEAtxsWHGS5ac4JWlhdTS3ZQeABkGbFFme+cSP//z/UEwFWAFAAWwAPeh7x
+				P/5I/B+PzZP2tZ7sjZzvuGjAqDX786El+bWiAbNo+8mWX/IvAAABASl6L6eVVZzKhs4Ryaozfi/7
+				dY8ho5Redda+2JbZRwVAQFCGSJzQA22oEI3VLjFZ0aq/5P89Ni+s9sRMpQxe2+856T2z34zBF3v2
+				rEIgFr928e23f77DK8LZ66r/+jhicM5p1a4dXq8VkVm19iJRrUlpf/a+rKr20bsBFs3iJ4sJRfw1
+				onKa7TLyS5ZVHaEWoheTUioc5rJpOA6twUVQBMzCLKwnpQsr0YostXWag7NlMBgORWiGv+fIOZuy
+				/3WwTR37pQiE1aaaqWI9v++b9CoA/uIODQGBoSYqtrjqhaiLiybqvGhH2Sam65Ejbsy6oWiWSaWh
+				gHSapds2CCbLLgsx0SibhHvYB2hF720baleFNekm6bhOfNtVWmlo+90/mMEhNQi5qt8bM+50dtKz
+				XLZ9oMFAhxyaEhFJkiQdgESk5qgb3CQLetTr9xpjcUTKd+iz68hMaLXeGnrtb6sRxLExz3V+zwQ5
+				NExG+I/msnPuZMi3STbgMitPgiddZ8tAkFaoOaYnJ55aOHJ+fTxzXPxpcp/K9Z5CFmoSS9uFAT4H
+				hTfHlW3iA6wrw44aCGjTUwJPEDbCooJgky1Lo6HopRTFZNk4dRBfcP9mauGxzfAhe6IOA1py6kdd
+				UTYNOWwst4hrLr001IYFIe05/YkKRd44wwd9c8x7tIKws7jVWO7M955AbKzBTY8gkLnqSVKCtpo8
+				ghgiyJ0O+XDIF3eTQP/qwxDV8tl3kJSpooOUliVlYkSGnOIRwxIVWvTsnRnrv3E8BN3low/+GKwq|
+			)
+			(checksum "76E2AC1B556EFF3A39684D9DF02F0003")
+		)
+	)
+)
