@@ -7378,7 +7378,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm"
+		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm_pol"
 			(at 200.66 162.56 0)
 			(effects
 				(font
@@ -7955,7 +7955,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm"
+		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm_pol"
 			(at 187.96 162.56 0)
 			(effects
 				(font

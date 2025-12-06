@@ -8789,7 +8789,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm"
+		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm_pol"
 			(at 146.05 29.21 0)
 			(effects
 				(font
@@ -10334,7 +10334,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm"
+		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm_pol"
 			(at 83.82 119.38 0)
 			(effects
 				(font
@@ -11564,7 +11564,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm"
+		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm_pol"
 			(at 82.55 29.21 0)
 			(effects
 				(font
@@ -11995,7 +11995,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm"
+		(property "Footprint" "Project Library:C_Disc_D7.5mm_W2.5mm_P7.62mm_pol"
 			(at 205.74 29.21 0)
 			(effects
 				(font
