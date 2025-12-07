@@ -480,7 +480,7 @@ The C64 had up to 64K Byte RAM and additional ROM areas that can be mapped. Toda
   <img src="docs/assets/images/page_14/procportmapping.png"/>
 </div>
 <br>
-The C64 uses a <a href="https://en.wikipedia.org/wiki/Programmable_Array_Logic">PAL</a> for chip select decoding. These were only one-time programmable, while the later developped <a href="https://en.wikipedia.org/wiki/Generic_Array_Logic">GAL</a> can be reprogrammed again and again. These GALs are still available and tools to <a href="https://www.microchip.com/en-us/development-tool/WinCUPL">compile</a> and <a href="https://www.amazon.com/dp/B0BFWKS53B">program</a>.
+The C64 uses a <a href="https://en.wikipedia.org/wiki/Programmable_Array_Logic">PAL</a> for chip select decoding. These were only one-time programmable, while the later developed <a href="https://en.wikipedia.org/wiki/Generic_Array_Logic">GAL</a> can be reprogrammed again and again. These GALs are still available and tools to <a href="https://www.microchip.com/en-us/development-tool/WinCUPL">compile</a> and <a href="https://www.amazon.com/dp/B0BFWKS53B">program</a>.
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/page_14/wincupl.png"/>
@@ -507,20 +507,33 @@ In revision A I added a UART as expansion externally for communicating with the 
 <br>
 The chips on this page are not placed on the board and they don't appear in the BOM. They are only used for SimTTL to create viewable signals from their outputs. For instance, the CPU registers are captured from the data bus with some load signal, but their outputs are only shown, when they are read onto the data bus. These virtual chips capture the contents with the same signals, but always output their contents to be viewed in SimTTL.<br>
 This page can be ignored in regards to the board functionality.<br>
-<br><br><br><br>
 <br>
-<h4 style="text-align: center;">Status</h4>
+<h4 style="text-align: center;">Board Layout</h4>
 <br>
-I'm done with all simulations and changing the schematic. The new layout for Rev B is finished and send to <a href="www.PCBway.com">PCBway</a> for manufacturing the boards.<br>
+The new layout for Rev B is finished and turned into a board by <a href="www.PCBway.com">PCBway</a>.<br>
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/layout.png"/>
 </div>
-The new board is a bit smaller in the vertical direction than the revision A board and all groups are re-organized for best display locations.<br>
+The new board is a bit smaller in the vertical direction than the revision A board and all groups are re-organized for best display locations.<br><br>
 <div style="text-align: center;">
   <img src="docs/assets/images/silkscreen.png"/>
 </div>
-As in the revision A I put some efforts into silkscreen to mark the different regions, display connectors and chips.
-
-
-
+As in the revision A I put some efforts into silkscreen to mark the different regions, display connectors and chips. Each chip is labeled with reference and value. Groups are outlines and named.
+<br><br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/fab.png"/>
+</div>
+The silkscreen could not include all information, I had to leave out capacitor and resistor values for space reasons. So I generated a fab drawing as a help with all values.
+<br><br>
+<br>
+<h4 style="text-align: center;">Status</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/board_revB.jpg"/>
+</div>
+I received the boards and I'm currently soldering all sockets and components.
+<div style="text-align: center;">
+  <img src="docs/assets/images/pcb_revB_progress.jpg"/>
+</div>
+Still missing few parts....
