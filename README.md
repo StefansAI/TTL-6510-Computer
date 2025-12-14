@@ -2,7 +2,7 @@
 <h2 style="text-align: center;">Yet another CPU made from TTL chips</h2>
 <br>
 <div style="text-align: center;">
-  <img src="docs/assets/images/pcb_revA.jpg" />
+  <img src="docs/assets/images/RevB.jpg" />
 </div>
 <br>
 <h3 style="text-align: center;">Introduction</h3>
@@ -505,8 +505,8 @@ In revision A I added a UART as expansion externally for communicating with the 
   <img src="docs/assets/images/page_16/simttl_regs.png"/>
 </div>
 <br>
-The chips on this page are not placed on the board and they don't appear in the BOM. They are only used for SimTTL to create viewable signals from their outputs. For instance, the CPU registers are captured from the data bus with some load signal, but their outputs are only shown, when they are read onto the data bus. These virtual chips capture the contents with the same signals, but always output their contents to be viewed in SimTTL.<br>
-This page can be ignored in regards to the board functionality.<br>
+The chips on this page are not placed on the board and they don't appear in the BOM. They are only used for SimTTL to create viewable signals from their outputs. For instance, the CPU registers are captured from the data bus with some load signal, but their outputs are only shown, when they are read onto the data bus. These virtual chips capture the contents with the same signals but always output their contents to be viewed in SimTTL.<br>
+This page can be ignored in regard to the board functionality.<br>
 <br>
 <h4 style="text-align: center;">Board Layout</h4>
 <br>
@@ -527,13 +527,21 @@ As in the revision A I put some efforts into silkscreen to mark the different re
 The silkscreen could not include all information, I had to leave out capacitor and resistor values for space reasons. So I generated a fab drawing as a help with all values.
 <br><br>
 <br>
-<h4 style="text-align: center;">Status</h4>
+<h4 style="text-align: center;">Assembly</h4>
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/board_revB.jpg"/>
 </div>
-I received the boards and I'm currently soldering all sockets and components.
+The blank board as it came from <a href="www.PCBway.com">PCBway</a>.
 <div style="text-align: center;">
   <img src="docs/assets/images/pcb_revB_progress.jpg"/>
 </div>
 Still missing few parts....
+<div style="text-align: center;">
+  <img src="docs/assets/images/pcb_Rev B assembled.jpg"/>
+</div>
+Fully assembled and all ICs placed!
+<div style="text-align: center;">
+  <img src="docs/assets/images/pcb_Rev B displays.jpg"/>
+</div>
+Rev B Board fully functional with all display boards plugged in and stepping through phases of a test program.
