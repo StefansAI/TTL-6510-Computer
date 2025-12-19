@@ -423,18 +423,13 @@ The first instruction in the screenshot is BCS while CF=L showing that the branc
 A backwards branch starts at the yellow marker and continues in the same way as the previous branch, even though FCY_COND and HCY_COND are set.<br>
 It is followed by another backwards instruction over a page boundary that requires a correction of the high part of PC to get from the wrong 0xFFA0 to 0xFEA0.<br>
 The last branch is forward again back over the page limit requiring again correction from 0xFE0D to 0xFF0D.<br>
-SPEC_COND is active to execute the branch, HCY_NEG is active when the address calculation result is negative (backwards) and FCY_COND is active to correct forward calculations or inactive to correct backward address calculations.<br>
+SPEC_COND is active to execute the branch, HCY_NEG is active when the address calculation result is negative (backwards) and FCY_COND is active to correct forward calculations or inactive to correct backward address calculations.
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/page_12/mc_bcc.png"/>
 </div>
 <br>
 Here are the micro codes for all these conditions. The other cases where SPEC_COND is low are identical and collapsed here.<br>
-<h5 style="text-align: center;">Conditional Branches</h5>
-<br>
-<div style="text-align: center;">
-  <img src="docs/assets/images/page_12/simttl_bcc.png"/>
-</div>
 <br>
 <br>
 <h4 style="text-align: center;">Page 13: Processor Port</h4>
