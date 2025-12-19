@@ -532,7 +532,7 @@ The silkscreen could not include all information, I had to leave out capacitor a
 <div style="text-align: center;">
   <img src="docs/assets/images/board_revB.jpg"/>
 </div>
-The blank board as it came from <a href="www.PCBway.com">PCBway</a>.
+The blank board as it came from <a href="www.PCBway.com">PCBway</a>. The delivery was quick and the board quality is great. Everything was as expected and worked later right away.
 <div style="text-align: center;">
   <img src="docs/assets/images/pcb_revB_progress.jpg"/>
 </div>
