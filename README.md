@@ -540,3 +540,24 @@ Fully assembled and all ICs placed!
   <img src="docs/assets/images/pcb_Rev B displays.jpg"/>
 </div>
 Rev B Board fully functional with all display boards plugged in and stepping through phases of a test program.
+
+<br><br>
+<br>
+<h4 style="text-align: center;">Real-Time Testing</h4>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/hardware_debug.jpg"/>
+</div>
+To test the functionality in real-time I connected the <a href="https://www.amazon.com/dp/B08C2GDFDW?ref=ppx_yo2ov_dt_b_fed_asin_title">32 channel logic analyzer</a> to address bus, data bus and control signals. My first attempts to simply run a modified C64 Basic/Kernel didn't work completely. The logic analyzer helped following the execution, but that wasn't enough to find remaining bugs.<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/dsview.png"/>
+</div>
+The DSView application allows protocol analysis, like UART, SPI, I2C etc. But the green signal groups here are simply parallel combinations of data bus and address bus. While the first two green rows are unconditional converted to busses, the second two green rows are address bus and data bus captured at rising edge of /LD_IR to clearly identify instructions.<br>
+Then I found this excellent <a href="https://github.com/Klaus2m5/6502_65C02_functional_tests">functional test code from Klaus Dorman</a> I could adapt. To fit it in ROM the C64mem-GAL code had to be temporary changed to enable 32k Byte ROM in the upper half. This test code exercises all op-codes in different variations. It stops whenever it detected any execution error. When it finally got through all combinations it took a minute even in real-time.<br>
+I found few little bugs in the micro code but also one that had to be fixed with cuts and jumps. While the overflow flag was working correctly for addition, it had to be inverted for subtractions. Fortunately there were two free XOR gates available.<br>
+<br>
+<div style="text-align: center;">
+  <img src="docs/assets/images/realterm.png"/>
+</div>
+Finally, the modified C64 Basic/Kernel is running. Keyboard in and screen out are redirected to the UART. With the <a href="https://www.digikey.com/en/products/detail/ftdi-future-technology-devices-international-ltd/TTL-234X-5V/6823719"> UART-to-TTL cable</a> connected to the PC, Realterm can be used as a terminal. Of course, the system can only be used in text mode. But it works like a C64 in this case.
