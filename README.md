@@ -1,5 +1,6 @@
 <h1 style="text-align: center;">TL 6510 Computer</h1>
-<h2 style="text-align: center;">Yet another CPU made from TTL chips</h2>
+<h2 style="text-align: center;">Yet another CPU made from TTL chips, <br>
+Now running C64 Basic/Kernel</h2>
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/RevB.jpg" />
@@ -555,7 +556,7 @@ To test the functionality in real-time I connected the <a href="https://www.amaz
 </div>
 The DSView application allows protocol analysis, like UART, SPI, I2C etc. But the green signal groups here are simply parallel combinations of data bus and address bus. While the first two green rows are unconditional converted to busses, the second two green rows are address bus and data bus captured at rising edge of /LD_IR to clearly identify instructions.<br>
 Then I found this excellent <a href="https://github.com/Klaus2m5/6502_65C02_functional_tests">functional test code from Klaus Dorman</a> I could adapt. To fit it in ROM the C64mem-GAL code had to be temporary changed to enable 32k Byte ROM in the upper half. This test code exercises all op-codes in different variations. It stops whenever it detected any execution error. When it finally got through all combinations it took a minute even in real-time.<br>
-I found few little bugs in the micro code but also one that had to be fixed with cuts and jumps. While the overflow flag was working correctly for addition, it had to be inverted for subtractions. Fortunately there were two free XOR gates available.<br>
+I found few little bugs in the micro code but also one that had to be fixed with cuts and jumps. While the overflow flag was working correctly for addition, it had to be inverted for subtractions. Fortunately, there were two free XOR gates available.<br>
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/realterm.png"/>
