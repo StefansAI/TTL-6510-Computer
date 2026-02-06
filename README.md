@@ -1,6 +1,5 @@
 <h1 style="text-align: center;">TL 6510 Computer</h1>
-<h2 style="text-align: center;">Yet another CPU made from TTL chips, <br>
-Now running C64 Basic/Kernel</h2>
+<h2 style="text-align: center;">A CPU made from TTL chips for education and running C64 Basic/Kernel</h2>
 <br>
 <div style="text-align: center;">
   <img src="docs/assets/images/RevB.jpg" />
